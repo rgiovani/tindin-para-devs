@@ -1,0 +1,59 @@
+body {
+    background: -webkit-radial-gradient(circle, #4ec9f8 0, #3d5caa 100%);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto Slab;
+}
+
+.card {
+    background-color: white;
+    padding: 40px;
+    width: 250px;
+    border-radius: 20px;
+    margin: 30px 0;
+}
+
+#avatar { 
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 10px auto;
+    overflow: hidden;
+}
+
+h1, h3, p {
+    text-align: center;
+}
+
+ul{
+    cursor: default;
+    text-align: center;
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    display: inline-block;
+    padding: 10px;
+}
+
+ul li a {
+    display: block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: solid 1px #4ec9f8;
+    text-indent: 45px;
+    position: relative;
+}
+
+ul li a:before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 25px;
+    text-indent: 0;
+    color: #4ec9f8;
+}
