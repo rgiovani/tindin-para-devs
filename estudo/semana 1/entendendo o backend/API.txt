@@ -1,0 +1,30 @@
+    API (Application Program Interface) ou Interface de comunicação de aplicações.
+    - É uma interface ideal que possibilita a comunicação entre sistemas(backends), compartilhando suas ações, ferramentas, padrões e protocolos.
+
+    API Rest utiliza o protocolo HTTP(Protocolo de comunicação) 1.1
+    - O protocolo aceita os famosos métodos (GET, PUT, DELETE, POST, UPDATE, HEAD, TRACE, CONNECT).
+
+    ENDPOINTS
+    - É a extremidade de um canal de comunicação.
+    - O endpoint é o que o serviço expõe, possuindo tres principais caracteristicas, A, B e C.
+        A: ADDRESS (onde o serviço esta hospedado).
+        B: BINDING (como um serviço pode ser acessado).
+        C: CONTRACT (o que pode ser visto no serviço)
+
+    SSL, Autenticação e Tokens
+    - Toda comunicação, seja a solicitação e os dados enviados pelas APIs, serão transportados criptografados usando o protocolo HTTPS.
+    - A autenticação é essencial para isolar o que pode ser fornecido de informações para cada um dos softwares que chama a API.
+    - Tokens são amplamente usados nas APIs e geralmente são identificadores únicos que nada mais é que uma sequencia maluca de caracteres, e são enviados juntos
+    das chamadas aos endpoints das APIs. Esses tokens são chaves que ficam guardadas e elas são validadas exatamente como se fossem uma senha, apartir dai esses dados podem
+    ser liberados para acessos.
+    
+    Retorno (JSON, XML etc...)
+    - JSON, XML, são formatos utilizados para retornar os dados das APIs baseados em WEB.
+    - JSON: Além de oculpar muito pouco espaço em memória, ele também é muito facil de transportar via rede.
+
+    Exemplos de API:
+    - GetSongBPM: retorna quantas batidas por minuto tem uma música.
+    - ViaCEP: retorna as informações de um CEP.
+    - Api do Google, Youtube, Paypal entre outros.
+
+    IMPORTANTE: Uma API não necessariamente é utilizada via Web, por exemplo, existe APIs do sistema operacional utilizadas por aplicações Desktop.

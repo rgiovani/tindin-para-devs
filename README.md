@@ -6,8 +6,8 @@
 
 - [x] Entendendo o Frontend
 - [x] Introdução ao HTML e CSS
-- [] Introdução ao Javascript
-- [] Entendendo o Backend
+- [x] Introdução ao Javascript
+- [x] Entendendo o Backend
 - [] Integrando o front com o back
 - [] Versionamento de código com git
 - [] Criando um jogo
