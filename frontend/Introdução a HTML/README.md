@@ -1,3 +1,3 @@
-# Exemplo de portifólio em HTML
+# Exemplo de portifólio com HTML e CSS
 
-<img src="./Screenshot.png"/>
+<img src="../../public/screenshots/portifolio-introHTML.png"/>
