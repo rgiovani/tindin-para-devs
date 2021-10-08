@@ -7,15 +7,14 @@ function noteRoutes(app) {
         res.json(notes);
     });
 
-    app.get('/notes/title', (req, res) => {
-        const challengeNotes = []
+    app.get('/notes/fav', (req, res) => {
+        const favNotes = [];
         notes.find(note => {
-            const { id, title } = note;
-            challengeNotes.push({
-                id, title
-            })
+            if (note?.isFav) {
+                favNotes.push(note);
+            }
         })
-        res.json(challengeNotes)
+        res.json(favNotes)
     });
 
     app.get('/notes/:id', (req, res) => {
@@ -41,14 +40,17 @@ function noteRoutes(app) {
         notes.push({
             id: uuidv4(),
             title,
-            description
+            description,
+            isFav: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
         });
 
         res.json({ message: 'Anotação salva com sucesso!!!' });
     });
 
     app.put('/notes', (req, res) => {
-        const { id, title, description } = req.body;
+        const { id, title, description, isFav } = req.body;
 
         if (!id) {
             return res.status(400).json({ message: 'Informe o campo id!' });
@@ -72,6 +74,8 @@ function noteRoutes(app) {
             if (note.id === id) {
                 note.title = title;
                 note.description = description;
+                note.isFav = isFav !== undefined ? isFav : note.isFav;
+                note.updatedAt = new Date();
             }
         });
 
@@ -92,7 +96,7 @@ function noteRoutes(app) {
         }
 
         notes.find((note, index) => {
-            if (note.id === id) {
+            if (note?.id === id) {
                 notes.splice(index, 1);
             }
         });

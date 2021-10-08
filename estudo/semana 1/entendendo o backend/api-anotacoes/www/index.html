@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Anotações</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="menu">
+                <div>
+                    <button onclick="setPage('anotacoes')">
+                        <i class='fas fa-tasks'></i>
+                        Anotações
+                    </button>
+                </div>
+                <div>
+                    <button onclick="setPage('livros')">
+                        <i class='fas fa-book-open'></i>
+                        Livros
+                    </button>
+                </div>
+                <div>
+                    <button onclick="setPage('favoritos')">
+                        <i class='fa fa-star'></i>
+                        Favoritos
+                    </button>
+                </div>
+            </div>
+
+            <div class="content">
+                <div>
+                    <div class="content-title"></div>
+                    <div class="form"></div>
+                    <div class="content-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <script src="init.js"></script>
+    </body>
+</html>

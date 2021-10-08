@@ -1,0 +1,168 @@
+body {
+    background-color: #1D1E24;
+    color: white;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    width: calc( 100% - 240px);
+    left: 240px;
+    position: absolute;
+    text-align: -webkit-center;
+}
+
+.content-title {
+    flex:1;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    background-color: #262730;
+    height: 100%;
+    padding-top: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.menu div button {
+    background-color: #262730;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    width: 200px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+}
+
+.menu div button i {
+    padding-right: 20px;
+}
+
+.menu div button:hover {
+    background-color: #272B40;
+}
+
+.form {    
+    background-color: #262730;
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px; 
+    margin-bottom: 10px;
+}
+
+.form label {
+    display: block;
+}
+
+.form input, textarea {
+    -webkit-appearance: none;
+    resize: none;
+    outline: none;
+    background-color: #1D1E24;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 5px;
+}
+.form div {
+    text-align: right;
+}
+
+.delete-button {
+    margin-left: auto;
+    margin-top: 5px;
+    margin-right: 2px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 30px;
+    background-color: rgb(0, 0, 0, 0);
+    cursor: pointer;
+    color: rgb(211, 31, 76);
+}
+
+.confirm-button {
+    margin-top: 5px;
+    margin-right: 2px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    font-size: 30px;
+    background-color: rgb(0, 0, 0, 0);
+    cursor: pointer;
+    color: rgb(69, 145, 103);
+}
+
+.card {
+    background-color: #262730;
+    color: white;
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+.button-card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 35px;
+}
+
+.delete-card-button {
+    font-size: 24px;
+    margin-left: auto;
+    margin-top: 5px;
+    margin-right: 2px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    background-color: rgb(0, 0, 0, 0);
+    cursor: pointer;
+    color: rgb(211, 31, 76);
+}
+
+.edit-card-button {
+    font-size: 24px;
+    margin-top: 5px;
+    margin-right: 2px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    background-color: rgb(0, 0, 0, 0);
+    cursor: pointer;
+    color: rgb(69, 145, 103);
+}
+
+.button-fav {
+    font-size: 18px;
+    background-color: rgb(255, 255, 255, 0);
+    border: 0;
+    color: rgb(145, 57, 57);
+    cursor: pointer;
+
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.button-card-container-favorite-page {
+    display: flex;
+}

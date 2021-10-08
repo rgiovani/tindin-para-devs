@@ -8,6 +8,10 @@
 - [x] Introdução ao HTML e CSS
 - [x] Introdução ao Javascript
 - [x] Entendendo o Backend
-- [] Integrando o front com o back
+- [x] Integrando o front com o back
+    - Desafios
+        - [x] Criar e integrar tela de anotações
+        - [x] Criar e integrar tela de livros
+        - [x] Criar e integrar tela de favoritos
 - [] Versionamento de código com git
 - [] Criando um jogo

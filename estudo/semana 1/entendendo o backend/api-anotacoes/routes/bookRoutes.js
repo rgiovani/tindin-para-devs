@@ -6,7 +6,17 @@ const books = [];
 function bookRoutes(app) {
     app.get('/books', (req, res) => {
         res.json(books);
-    })
+    });
+
+    app.get('/books/fav', (req, res) => {
+        const favBooks = [];
+        books.find(book => {
+            if (book?.isFav) {
+                favBooks.push(book);
+            }
+        })
+        res.json(favBooks)
+    });
 
     app.get('/books/:id', (req, res) => {
         const book = findItemIn(books).where("id").equal(req.params.id)
@@ -14,7 +24,7 @@ function bookRoutes(app) {
             return throwMessage(res.status(400), `Nenhum livro encontrado com o id: ${req.params.id}`);
         }
         res.json(book);
-    })
+    });
 
     app.post('/books', (req, res) => {
         const { title, author, genre } = req.body;
@@ -33,6 +43,7 @@ function bookRoutes(app) {
                     title,
                     author,
                     genre,
+                    isFav: false,
                     createdAt: new Date(),
                     updatedAt: new Date()
                 }
@@ -44,7 +55,7 @@ function bookRoutes(app) {
     })
 
     app.put('/books', (req, res) => {
-        const { id, title, author, genre } = req.body;
+        const { id, title, author, genre, isFav } = req.body;
         if (!id) return throwInvalidField(res, 'id');
 
         if (!title) return throwInvalidField(res, 'title');
@@ -58,6 +69,8 @@ function bookRoutes(app) {
             book.title = title;
             book.author = author;
             book.genre = genre;
+            book.isFav = isFav !== undefined ? isFav : book.isFav;
+            book.updatedAt = new Date();
         } else {
             return throwMessage(res.status(400), 'Nenhum livro foi encontrado com esse id');
         }
@@ -77,7 +90,7 @@ function bookRoutes(app) {
         }
 
         books.find((book, index) => {
-            if (book.id === id) {
+            if (book?.id === id) {
                 books.splice(index, 1);
             }
         });
