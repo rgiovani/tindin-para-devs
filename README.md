@@ -1,6 +1,7 @@
 # Tindin para Devs
-
-![CAPA IMAGEM](<https://static.wixstatic.com/media/134f29_afc8e97c5bbc428b9643e1028c5b2e6f~mv2.png/v1/fill/w_360,h_360,al_c,q_95/134f29_afc8e97c5bbc428b9643e1028c5b2e6f~mv2.webp>)
+<p align="center"> 
+    <img           src="https://static.wixstatic.com/media/134f29_afc8e97c5bbc428b9643e1028c5b2e6f~mv2.png/v1/fill/w_360,h_360,al_c,q_95/134f29_afc8e97c5bbc428b9643e1028c5b2e6f~mv2.webp">
+</p>
 
 **Do Back ao Front:** Curso introdutório de desenvolvimento do back ao front utilizando tecnologias ativas.
 
