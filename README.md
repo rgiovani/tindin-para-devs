@@ -1,5 +1,7 @@
 # Tindin para Devs
 
+![CAPA IMAGEM](<https://static.wixstatic.com/media/134f29_afc8e97c5bbc428b9643e1028c5b2e6f~mv2.png/v1/fill/w_360,h_360,al_c,q_95/134f29_afc8e97c5bbc428b9643e1028c5b2e6f~mv2.webp>)
+
 **Do Back ao Front:** Curso introdutório de desenvolvimento do back ao front utilizando tecnologias ativas.
 
 ### **SEMANA 1**
@@ -15,3 +17,7 @@
         - [x] Criar e integrar tela de favoritos
 - [] Versionamento de código com git
 - [] Criando um jogo
+
+
+Informações sobre o evento: 
+ - https://www.tindin.com.br/post/curso-dev
