@@ -9,7 +9,7 @@ Em **entendendo o backend** utilize:
 
 - [x] Implementar estilo na página;
 - [x] Adicionar proporções dinâmicas na página;
-- [x] Simulação básica de Single Page Application;
+- [x] Simulação básica (Conceito de atualização em tempo real do html) de Single Page Application;
 - [x] Listagem de cards favoritos em tempo real;
 - [x] Remoção e adição dos livros;
 
