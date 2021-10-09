@@ -1,0 +1,19 @@
+{
+  "name": "@rgiovani/pedra-papel-tesoura",
+  "version": "1.0.0",
+  "description": "- [] A api deverá possuir apenas uma rota.\r - [] O frontend deve permitir o usuário escolher entre as opções: PEDRA, PAPEL e TESOURA.\r - [] O frontend deve enviar o valor escolhido pelo usuário para o backend.\r - [] O backend deve gerar um valor randomico entre PEDRA, PAPEL e TESOURA.\r - [] O backend deve verificar se o valor gerado por ele ganhará do valor escolhido pelo usuário.\r - [] O backend deve retornar o valor gerado randomicamente e o resultado de quem ganhará essa rodada.\r - [] O frontend deve apresentar para o usuário o valor que o backend gerou e quem foi o ganhador dessa rodada.\r - [] O frontend deve permitir uma nova rodada.\r - [] O frontend deve apresentar para o usuário o ganhador de quem ganhar 3 rodadas primeiro.\r - [] A partida deve terminar quando o usuário ou a máquina ganhar 3 rodadas.\r - [] O frontend deve apresentar uma mensagem na tela de quem ganhou a partida e permitir o usuário a jogar novamente.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@rgiovani",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
