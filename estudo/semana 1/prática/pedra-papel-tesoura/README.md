@@ -1,17 +1,8 @@
 ## Desafio: Criar um jogo de Pedra, Papel e Tesoura.
 
-<br>
+#### *Para começar utilize o comando:* ``` npm start ```
 
-### **PEDRA, PAPEL OU TESOURA?**
-
-<br>
-
-### Para começar utilize na pasta **pedra-papel-tesoura** o comando:
-``` npm start ```
-
-<br>
-
-### **Os requisitos:**
+#### **Os requisitos:**
 - **[x]** Implementar a comunicação entre o frontend e o backend
 - **[]** O backend deverá possuir apenas uma rota.
 - **[]** O frontend deve permitir o usuário escolher entre as opções: PEDRA, PAPEL e TESOURA.
