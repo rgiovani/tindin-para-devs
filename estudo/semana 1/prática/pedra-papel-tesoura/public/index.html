@@ -9,7 +9,17 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="title"></h1>
+
+            <p class="user_points"></p>
+            <p class="computer_points"></p>
+
+            <div class="options">
+                <button onclick="play('paper')">PAPEL</button>
+                <button onclick="play('rock')">PEDRA</button>
+                <button onclick="play('scissors')">TESOURA</button>
+            </div>
+
+            <div class="rounds"></div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

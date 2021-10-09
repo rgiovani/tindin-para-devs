@@ -16,7 +16,7 @@
         - [x] Criar e integrar tela de anotações
         - [x] Criar e integrar tela de livros
         - [x] Criar e integrar tela de favoritos
-- [] Versionamento de código com git
+- [x] Versionamento de código com git
 - [] Criando um jogo
 
 
