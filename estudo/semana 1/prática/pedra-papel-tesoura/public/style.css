@@ -182,7 +182,30 @@ button img:hover{
 
  @media only screen and (max-height: 800px)  {
 
-    button {
+    .menu {
+        margin-top: 120px;
+        justify-items: center;
+    }
+
+    .menu {
+        margin-top: 120px;
+        justify-items: center;
+    }
+    
+    .control_logo {
+        min-height: 180px;
+        min-width: 180px;
+        max-height:300px;
+        max-width: 300px;
+    }
+    
+    .menu_buttons h1{
+        font-size: 40px;
+        margin-top: 120px;
+    }
+
+
+    .options button {
         width: 110px;
     }
 
