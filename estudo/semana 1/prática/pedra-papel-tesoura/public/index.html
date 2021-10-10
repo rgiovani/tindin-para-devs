@@ -10,16 +10,25 @@
     <body>
         <div class="container">
 
-            <p class="user_points"></p>
-            <p class="computer_points"></p>
-
-            <div class="options">
-                <button onclick="play('paper')">PAPEL</button>
-                <button onclick="play('rock')">PEDRA</button>
-                <button onclick="play('scissors')">TESOURA</button>
+            <div class="display">
+                <img class="char_img" src="./assets/img/usingpc.png" alt="rgiovani">
+                <div class="ballons_container"> </div>
             </div>
 
-            <div class="rounds"></div>
+            <div class="options">
+                <button class="paper-button" onclick="play('paper')">
+                    <img src="./assets/img/hands/paper.png" alt="PAPEL">
+                </button>
+                <button class="rock-button" onclick="play('rock')">
+                    <img src="./assets/img/hands/rock.png" alt="PEDRA">
+                </button>
+                <button class="scissors-button" onclick="play('scissors')">
+                    <img src="./assets/img/hands/scissors.png" alt="TESOURA">
+                </button>
+            </div>
+
+            <div class="logs"></div>
+
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
