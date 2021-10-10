@@ -6,12 +6,13 @@ function gameRoutes(app) {
     const log = {
         userPoints: 0,
         computerPoints: 0,
-        rounds: [],
+        rounds: []
     }
 
     app.get('/game/:userChoose', (req, res) => {
         const userChoose = req.params.userChoose;
         let computerChoose;
+
         if (OPTIONS.includes(userChoose?.toUpperCase())) {
             if (log.userPoints > 2 || log.computerPoints > 2) {
                 log.rounds = [];

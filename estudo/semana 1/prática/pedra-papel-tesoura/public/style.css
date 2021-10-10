@@ -1,4 +1,5 @@
 body, html {
+    
     background-color: #181818;
     text-align: center;
     color: white;
@@ -19,11 +20,42 @@ button {
     margin-right: 10px;
     width: auto;
     height: auto;
-
 }
 
 button img:hover{
     opacity: 0.3;
+}
+
+.menu {
+    display: flex;
+    margin-top: 140px;
+
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.control_logo {
+    min-height: 200px;
+    min-width: 200px;
+    max-height:320px;
+    max-width: 320px;
+    width: auto;
+
+    justify-items: center;
+}
+.menu_buttons{
+
+}
+
+.menu_buttons h1{
+    color: white;
+    font-size: 40px;
+    margin-top: 140px;
+    font-family: 'Press Start 2P', Arial, Helvetica, sans-serif;
 }
 
 .container {
