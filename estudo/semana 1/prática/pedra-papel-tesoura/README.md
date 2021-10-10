@@ -6,6 +6,10 @@
     <img width="650" src="./public/screenshot_v1.png">
 </p>
 
+<p align="center"> 
+    <img width="650" src="./public/screenshot_v1_1.png">
+</p>
+
 #### **Os requisitos:**
 - **[x]** Implementar a comunicação entre o frontend e o backend
 - **[x]** O backend deverá possuir apenas uma rota.
