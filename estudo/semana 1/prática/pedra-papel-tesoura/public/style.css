@@ -1,7 +1,7 @@
 body, html {
-    
     background-color: #181818;
     text-align: center;
+    align-content: center;
     color: white;
     width: 100%;
     height: 100%;
@@ -13,10 +13,13 @@ body, html {
 }
 
 button {
-    border-radius: 100%;
     cursor: pointer;
     background-color: transparent;
     border: 0;
+}
+
+.options button {
+    border-radius: 100%;
     margin-right: 10px;
     width: auto;
     height: auto;
@@ -28,7 +31,7 @@ button img:hover{
 
 .menu {
     display: flex;
-    margin-top: 140px;
+    margin-top: 240px;
 
     flex-direction: column;
     text-align: center;
@@ -36,26 +39,39 @@ button img:hover{
 
     width: 100%;
     height: 100%;
+
+    position: absolute;
 }
 
 .control_logo {
-    min-height: 200px;
-    min-width: 200px;
-    max-height:320px;
+    min-width: 40px;
     max-width: 320px;
-    width: auto;
+    width: 250px;
 
     justify-items: center;
 }
 .menu_buttons{
+    position: absolute;
+    margin-top: 310px;
+    position: absolute;
+}
 
+.menu_buttons :hover{
+    color: #B8CA43;
 }
 
 .menu_buttons h1{
     color: white;
     font-size: 40px;
-    margin-top: 140px;
     font-family: 'Press Start 2P', Arial, Helvetica, sans-serif;
+    
+}
+
+.menu_ingame img{
+    background-color: rgba(70, 41, 150, 0.192);
+    padding: 110px 80px;
+    border-radius: 100%;
+    max-width: 280px;
 }
 
 .container {
@@ -176,32 +192,59 @@ button img:hover{
     margin-right: 5rem;
 }
 
-.winner {
-
+.result_container {
+    align-items: center;
+    text-align: center;
+    font-family: 'Press Start 2P', Arial, Helvetica, sans-serif;
 }
+
+.dialog_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    align-items: center;
+    text-align: center;
+}
+
+.dialog_box img {
+    margin-right: 10px;
+    width:50px
+}
+
+.dialog_box p{
+    font-size: 18px;
+}
+
 
  @media only screen and (max-height: 800px)  {
 
     .menu {
-        margin-top: 120px;
-        justify-items: center;
+        display: flex;
+        margin-top: 100px;
+    
+        width: 100%;
+        height: 100%;
     }
 
-    .menu {
-        margin-top: 120px;
-        justify-items: center;
+    .menu_ingame img{
+        margin-top: 90px;
+        padding: 80px 80px;
+        width: 210px;
     }
-    
+
     .control_logo {
-        min-height: 180px;
-        min-width: 180px;
-        max-height:300px;
+        min-width: 50px;
         max-width: 300px;
+        width: 250px;
     }
-    
+
+    .menu_buttons{
+        margin-top: 310px;
+    }
+
     .menu_buttons h1{
         font-size: 40px;
-        margin-top: 120px;
     }
 
 
@@ -258,3 +301,4 @@ button img:hover{
         margin-right: 10px;
     }
 }
+

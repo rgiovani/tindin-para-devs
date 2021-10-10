@@ -1,16 +1,50 @@
 let startGame = false;
 let reload = true;
 
+let loserRobotDialogs = [
+    'Ok human, i let you win!',
+    'Hah, if it wasn\'t for me...',
+    'Yeah yeah, was lucky!',
+    'I admit... you are doing well, Human',
+    'Bzzzz, when will it be my turn...'
+];
+
+let winnerRobotDialogs = [
+    'Haha, bzzz, too easy!',
+    'Hey human, better lucky next time...',
+    'What? nah, bzz, this is not a lucky game, Human, bzzz, It\'s MY game. bzz',
+    'e.. bzzz, easy peasy lemon squeezy',
+    'I don\'t even have to use my 01010101010 bzzz...'
+];
+
 
 function menu(start) {
     if (!!start) {
         startGame = start;
         reload = false;
-        $('.menu').fadeOut('fast');
-        $('.display').fadeIn(4000);
-        $('.options').fadeIn(4000);
-        play()
+        $('.menu').hide();
+        $('.display').fadeIn(2000);
+        $('.options').fadeIn(3000);
+        play();
     }
+}
+
+function renderMessages(isUserWinner) {
+    const dialogPosition = Math.floor(Math.random() * 5);
+    $('.result_container').fadeIn(2000);
+
+    let message = `<div class="dialog_box"><img src="./assets/img/robot.png" alt="user"></img>`;
+
+    if (!!isUserWinner) {
+        $('.result_container').append(`<h1> You Win! </h1>`);
+        message = message.concat(`<p>${loserRobotDialogs[dialogPosition]}</p>`);
+    } else {
+        $('.result_container').append(`<h1> You lose! </h1>`);
+        message = message.concat(`<p>${winnerRobotDialogs[dialogPosition]}</p>`);
+    }
+
+    message = message.concat(`</div>`);
+    $('.result_container').append(message);
 }
 
 function renderPlayAgain(computerPoints, userPoints) {
@@ -23,15 +57,18 @@ function renderPlayAgain(computerPoints, userPoints) {
     if (computerPoints > 2 || userPoints > 2) {
         startGame = false;
         reload = true;
-        $('.menu').fadeIn('fast');
-        $('.display').hide();
+        $('.menu').fadeIn(1200);
+        $('.menu').addClass("menu_ingame");
         $('.options').hide();
 
         if (computerPoints > 2) {
             menu = menu.concat(`broken_control.png" alt="control_logo"></img>`);
-            textPlay = "PLAY AGAIN";
+            textPlay = "TRY AGAIN";
+            renderMessages(false);
         } else {
             menu = menu.concat(`control.png" alt="control_logo"></img>`);
+            textPlay = "PLAY AGAIN";
+            renderMessages(true);
         }
 
     } else {
@@ -98,6 +135,7 @@ function play(userChoose) {
     }
 
     if (!!startGame) {
+        $('.result_container').html('');
         $('.user_points').html('');
         $('.computer_points').html('');
         $('.ballons_container').html('');
