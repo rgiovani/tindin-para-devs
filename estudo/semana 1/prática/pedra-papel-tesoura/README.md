@@ -3,11 +3,11 @@
 #### *Para começar utilize o comando:* ``` npm start ```
 
 <p align="center"> 
-    <img width="650" src="./public/screenshot_v1.png">
+    <img width="850px" src="./public/screenshot_v1.png">
 </p>
 
 <p align="center"> 
-    <img width="650" src="./public/screenshot_v1_1.png">
+    <img width="850px" src="./public/screenshot_v1_1.png">
 </p>
 
 #### **Os requisitos:**
