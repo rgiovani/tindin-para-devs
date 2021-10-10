@@ -219,6 +219,14 @@ button img:hover{
 
  @media only screen and (max-height: 800px)  {
 
+    .dialog_box img {
+        width:50px
+    }
+    
+    .dialog_box p{
+        font-size: 14px;
+    }
+
     .menu {
         display: flex;
         margin-top: 100px;
