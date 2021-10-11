@@ -17,7 +17,7 @@
         - [x] Criar e integrar tela de livros
         - [x] Criar e integrar tela de favoritos
 - [x] Versionamento de código com git
-- [] Criando um jogo
+- [x] Criando um jogo
 
 
 Informações sobre o evento: 
