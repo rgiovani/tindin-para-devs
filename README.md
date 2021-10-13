@@ -19,6 +19,14 @@
 - [x] Versionamento de código com git
 - [x] Criando um jogo
 
+### **SEMANA 2**
+
+- [] Tipando o Javascript com Typescript
+- [] Organizando seu projeto back
+- [] Mais poder para o frontend com Angular
+- [] Banco de dados relacional (MySQL)
+- [] Trocando parâmetros entre páginas no front
+- [] Atividade #2 - Cadastro de aulas
 
 Informações sobre o evento: 
  - https://www.tindin.com.br/post/curso-dev
