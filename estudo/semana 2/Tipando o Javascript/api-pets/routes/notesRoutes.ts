@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-const { v4: uuidv4 } = require('uuid')
+import { v4 as uuidv4 } from 'uuid'
 
 interface INotes {
     id: string,
@@ -15,6 +15,25 @@ const notes: Array<INotes> = []
 export default function notesRoutes(app: any) {
     app.get('/notes', (req: Request, res: Response) => {
         res.send(notes)
+    })
+
+    app.get('/notes/fav', (req: Request, res: Response) => {
+        const favNotes: Array<INotes> = [];
+        notes.find(note => {
+            if (note.isFav) {
+                favNotes.push(note);
+            }
+        })
+        res.json(favNotes)
+    });
+
+    app.get('/notes/:id', (req: Request, res: Response) => {
+        const note = notes.find((n) => n.id === req.params.id)
+
+        if (!note) {
+            return res.status(400).json({ message: `Nenhuma anotação encontrada com o id ${req.params.id}` })
+        }
+        res.json(note)
     })
 
     app.post('/notes', (req: Request, res: Response) => {
@@ -38,15 +57,6 @@ export default function notesRoutes(app: any) {
         })
 
         res.send({ message: 'Anotação salva com sucesso!!!' })
-    })
-
-    app.get('/notes/:id', (req: Request, res: Response) => {
-        const note = notes.find((n) => n.id === req.params.id)
-
-        if (!note) {
-            return res.status(400).json({ message: `Nenhuma anotação encontrada com o id ${req.params.id}` })
-        }
-        res.json(note)
     })
 
     app.put('/notes', (req: Request, res: Response) => {

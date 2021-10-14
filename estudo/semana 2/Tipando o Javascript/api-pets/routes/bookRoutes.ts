@@ -1,15 +1,27 @@
+import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { throwInvalidField, findItemIn, throwMessage } from './utils';
 
-const books = [];
+import { findBookById, throwInvalidField, throwMessage } from './utils';
 
-function bookRoutes(app) {
-    app.get('/books', (req, res) => {
+export interface IBook {
+    id: string,
+    title: string,
+    author: string,
+    genre: string,
+    isFav: boolean,
+    createdAt: Date,
+    updatedAt: Date
+}
+
+const books: Array<IBook> = [];
+
+export default function bookRoutes(app: any) {
+    app.get('/books', (req: Request, res: Response) => {
         res.json(books);
     });
 
-    app.get('/books/fav', (req, res) => {
-        const favBooks = [];
+    app.get('/books/fav', (req: Request, res: Response) => {
+        const favBooks: Array<IBook> = [];
         books.find(book => {
             if (book?.isFav) {
                 favBooks.push(book);
@@ -18,15 +30,15 @@ function bookRoutes(app) {
         res.json(favBooks)
     });
 
-    app.get('/books/:id', (req, res) => {
-        const book = findItemIn(books).where("id").equal(req.params.id)
+    app.get('/books/:id', (req: Request, res: Response) => {
+        const book = findBookById(books, req.params.id)
         if (!book) {
             return throwMessage(res.status(400), `Nenhum livro encontrado com o id: ${req.params.id}`);
         }
         res.json(book);
     });
 
-    app.post('/books', (req, res) => {
+    app.post('/books', (req: Request, res: Response) => {
         const { title, author, genre } = req.body;
         if (!title) return throwInvalidField(res, 'title');
 
@@ -34,7 +46,8 @@ function bookRoutes(app) {
 
         if (!genre) return throwInvalidField(res, 'genre');
 
-        const book = findItemIn(books).where("title").equal(title);
+        const book = books.find(book => book.title === title);
+
         if (!book) {
             const id = uuidv4();
             books.push(
@@ -54,7 +67,7 @@ function bookRoutes(app) {
         }
     })
 
-    app.put('/books', (req, res) => {
+    app.put('/books', (req: Request, res: Response) => {
         const { id, title, author, genre, isFav } = req.body;
         if (!id) return throwInvalidField(res, 'id');
 
@@ -64,7 +77,7 @@ function bookRoutes(app) {
 
         if (!genre) return throwInvalidField(res, 'genre');
 
-        const book = findItemIn(books).where("id").equal(id);
+        const book = findBookById(books, id);
         if (book) {
             book.title = title;
             book.author = author;
@@ -78,12 +91,12 @@ function bookRoutes(app) {
         res.json({ message: 'Livro editado com sucesso!' });
     })
 
-    app.delete('/books', (req, res) => {
+    app.delete('/books', (req: Request, res: Response) => {
         const { id } = req.body;
 
         if (!id) return throwInvalidField(res, 'id');
 
-        const book = findItemIn(books).where("id").equal(id);
+        const book = findBookById(books, id);
 
         if (!book) {
             return throwMessage(res.status(400), 'Nenhum livro foi encontrado com esse id');
@@ -98,6 +111,3 @@ function bookRoutes(app) {
         res.json({ message: 'Livro deletado com sucesso!' });
     })
 }
-
-const _bookRoutes = bookRoutes;
-export { _bookRoutes as bookRoutes };
