@@ -21,7 +21,7 @@
 
 ### **SEMANA 2**
 
-- [] Tipando o Javascript com Typescript
+- [x] Tipando o Javascript com Typescript
 - [] Organizando seu projeto back
 - [] Mais poder para o frontend com Angular
 - [] Banco de dados relacional (MySQL)
