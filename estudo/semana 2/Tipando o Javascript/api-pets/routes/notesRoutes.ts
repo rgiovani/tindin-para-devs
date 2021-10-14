@@ -40,6 +40,15 @@ export default function notesRoutes(app: any) {
         res.send({ message: 'Anotação salva com sucesso!!!' })
     })
 
+    app.get('/notes/:id', (req: Request, res: Response) => {
+        const note = notes.find((n) => n.id === req.params.id)
+
+        if (!note) {
+            return res.status(400).json({ message: `Nenhuma anotação encontrada com o id ${req.params.id}` })
+        }
+        res.json(note)
+    })
+
     app.put('/notes', (req: Request, res: Response) => {
         const { id, title, description, isFav } = req.body
 
