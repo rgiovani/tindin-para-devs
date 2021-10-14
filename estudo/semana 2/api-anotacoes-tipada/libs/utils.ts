@@ -1,6 +1,6 @@
 import { Response } from "express";
 
-import { IBook } from './../bookRoutes';
+import { IBook } from '../routes/books';
 
 export const throwMessage = (responseStatus: Response, message: string) => {
     responseStatus.json({ message });
