@@ -1,0 +1,18 @@
+<p>dash works!</p>
+
+
+<button (click)="backPage()">back page</button>
+
+<h1>Diretivas</h1>
+
+<h4>Diretiva verdadeira:</h4>
+<div *ngFor="let dash of dashList">
+  <!-- <p>{{dash.name}}</p> -->
+  <p *ngIf="dash.active">{{dash.name}}</p>
+</div>
+
+<h4>Diretiva falsa:</h4>
+<div *ngFor="let dash of dashList">
+  <!-- <p>{{dash.name}}</p> -->
+  <p *ngIf="!dash.active">{{dash.name}}</p>
+</div>
