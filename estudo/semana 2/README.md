@@ -12,10 +12,12 @@
 
 - Neste módulo aprendemos a como estruturar o projeto em uma arquitetura de pastas onde a api fica corretamente organizada.
 
-    -> api-anotacoes-tipada <br>
-    --> controllers <br>
-    --> libs <br>
-    --> routes <br>
-    --> services <br>
-    --> types <br>
-    --> www <br>
+------> api-anotacoes-tipada <br>
+-------->> controllers <br>
+-------->> libs <br>
+-------->> routes <br>
+-------->> services <br>
+-------->> types <br>
+-------->> www <br>
+
+- Aprendemos a como lidar e padronizar erros, devolvendo corretamente as respostas do backend para o frontend.
