@@ -58,7 +58,7 @@ select * from users; //devolve os usuarios cadastrados
   - [x] deve validar a tentativa de login em contas que ja estão logadas.
   - [x] deve permitir deslogar apenas de contas logadas
 - [] deve listar as aulas cadastradas por aquele usuario.
-- [] deve pertmir cadastrar novas aulas.
+- [] deve permitir cadastrar novas aulas.
 - [] deve permitir editar e excluir uma aula existente.
 
 <br>
