@@ -22,7 +22,11 @@
 
 - Aprendemos a como lidar e padronizar erros, devolvendo corretamente as respostas do backend para o frontend.
 
-**Módulo 3: Banco de dados relacional (MySQL)**
+**Módulo 3: Mais poder para o frontend com Angular**
+- Neste módulo aprendemos sobre os conceitos principais do Angular e criamos um projeto com o framework.
+- Configuramos o projeto e aprendemos a criar componentes; implementamos a navegação entre os componentes e criamos diretivas onde podemos visualizar diretivas verdadeiras e falsas no componente 'dash'.
+
+**Módulo 4: Banco de dados relacional (MySQL)**
 
 - Neste módulo integramos a api com o banco de dados MySQL.
 - Criamos as tabelas para os items: livros(books), notas(notes) e animais(pets).
