@@ -65,7 +65,8 @@ select * from users; //devolve os usuarios cadastrados
 
 ### **Rotas:**
 
-- **login** -> *(POST)* **/user/login**
+- **login** -> *(POST)*
+  - route: **/user/login**
   - *Body(JSON)*
   ```
     { "email": "ronaldo@mail.com", "password": "123456"}
@@ -73,7 +74,8 @@ select * from users; //devolve os usuarios cadastrados
 
 <br>
 
-- **logout** -> *(DELETE)* **/user/logout**
+- **logout** -> *(DELETE)* 
+  - route: **/user/logout** 
   - *Body(JSON)*
   ```
     { "email": "ronaldo@mail.com", "password": "123456"}
@@ -81,11 +83,13 @@ select * from users; //devolve os usuarios cadastrados
 
 <br>
 
-- **listar** -> *(GET)* **/users**
+- **listar** -> *(GET)*
+  - route: **/users**
 
 <br>
 
-- **editar** -> *(PUT)* **/user/edit**
+- **editar** -> *(PUT)*
+  - route: **/user/edit** 
   - *Body(JSON)*
   ```
     { "id": 1, "email": "giovani@mail.com", "password": "12345678"}
@@ -93,11 +97,13 @@ select * from users; //devolve os usuarios cadastrados
 
 <br>
 
-- **detalhe** -> *(GET)* **/user/:id**
+- **detalhe** -> *(GET)*
+  - route: **/user/:id**
 
 <br>
 
-- **criar** -> *(POST)* **/user/register**
+- **criar** -> *(POST)*
+  - route: **/user/register**
   - *Body(JSON)*
   ```
     { "email": "giovani@mail.com", "password": "12345678"}
@@ -105,7 +111,8 @@ select * from users; //devolve os usuarios cadastrados
 
 <br>
 
-- **excluir** -> *(DELETE)* **/user**
+- **excluir** -> *(DELETE)*
+  - route: **/user**
   - *Body(JSON)*
   ```
     { "id": 1}
