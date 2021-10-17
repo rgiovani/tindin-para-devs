@@ -1,39 +1,34 @@
-import { v4 as uuidv4 } from 'uuid'
+import * as db from '../libs/mysql'
 
 import { IBook } from './../types/IBook';
 
 const books: Array<IBook> = [];
 
-const findFavorites = () => {
-    const favBooks: Array<IBook> = [];
-    books.find(book => {
-        if (!!book.isFav) {
-            favBooks.push(book);
-        }
-    })
-
-    return favBooks
+const findFavorites = async () => {
+    const result = await db.execute('select * from books where isFav=true')
+    return result.rowns;
 }
 
-const list = () => {
-    return books;
+const list = async () => {
+    const result = await db.execute('select * from books')
+    return result.rowns;
 }
 
-const get = (id: string) => {
+const get = async (id: string) => {
     if (!id) {
         throw new Error("Informe o campo do id!");
     }
 
-    const book = books.find((n) => n.id === id)
+    const book = await db.execute('select * from books where id=?', [id])
 
-    if (!book) {
+    if (!book.rowns.toString()) {
         throw new Error(`Nenhum livro encontrado com o id ${id}`);
     }
 
-    return book;
+    return book.rowns;
 }
 
-const create = (book: IBook) => {
+const create = async (book: IBook) => {
     if (!book.title) {
         throw new Error("Informe o campo title");
     }
@@ -46,25 +41,22 @@ const create = (book: IBook) => {
         throw new Error("Informe o campo genre!");
     }
 
-    book.createdAt = new Date();
-    book.updatedAt = new Date();
-    book.isFav = false;
-    book.id = uuidv4();
+    await db.execute(
+        'insert into books (title, author, genre, isFav, createdAt, updatedAt) values (?, ?, ?, ?, ?, ?)',
+        [book.title, book.author, book.genre, false, new Date(), new Date()]
+    )
 
-    books.push(book)
-
-    return book;
+    return true;
 }
 
-const update = (book: IBook) => {
-
+const update = async (book: IBook) => {
     if (!book.id) {
         throw new Error("Informe o campo id!");
     }
 
-    const bookFounded = books.find((n) => n.id === book.id)
+    const bookFounded = await db.execute('select * from books where id=?', [book.id])
 
-    if (!bookFounded) {
+    if (!bookFounded.rowns.toString()) {
         throw new Error(`Nenhum livro encontrado com o id ${book.id}`);
     }
 
@@ -80,36 +72,28 @@ const update = (book: IBook) => {
         throw new Error("Informe o campo genre");
     }
 
-    books.find(bookObject => {
-        if (bookObject.id === book.id) {
-            bookObject.title = book.title
-            bookObject.author = book.author
-            bookObject.genre = book.genre
-            bookObject.isFav = book.isFav !== undefined ? book.isFav : bookObject.isFav
-            bookObject.updatedAt = new Date()
-        }
-    })
+    book.isFav = (book.isFav == undefined) ? false : book.isFav
 
-    return book;
+    await db.execute(
+        'update books set title=?, author=?, genre=?, isFav=?, updatedAt=? where id=?',
+        [book.title, book.author, book.genre, book.isFav, new Date(), book.id]
+    )
+
+    return true;
 }
 
-const remove = (id: string) => {
-
+const remove = async (id: string) => {
     if (!id) {
         throw new Error("Informe o campo id!");
     }
 
-    const book = books.find((n) => n.id === id)
+    const book = await db.execute('select * from books where id=?', [id])
 
-    if (!book) {
+    if (!book.rowns.toString()) {
         throw new Error(`Nenhum livro encontrado com o id ${id}`)
     }
 
-    books.find((book, index) => {
-        if (book?.id === id) {
-            books.splice(index, 1)
-        }
-    })
+    await db.execute('delete from books where id=?', [id])
 
     return true;
 }

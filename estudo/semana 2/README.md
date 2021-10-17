@@ -21,3 +21,9 @@
 -------->> www <br>
 
 - Aprendemos a como lidar e padronizar erros, devolvendo corretamente as respostas do backend para o frontend.
+
+**Módulo 3: Banco de dados relacional (MySQL)**
+
+- Neste módulo integramos a api com o banco de dados MySQL.
+- Criamos as tabelas para os items: livros(books), notas(notes) e animais(pets).
+- Para cada item a api realiza um CRUD, que manipula e interage com as tabelas do banco de dados.

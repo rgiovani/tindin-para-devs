@@ -80,6 +80,8 @@ function salvar() {
         }
     })
 
+
+    listar();
 }
 
 function cardRender(page, obj) {
@@ -272,11 +274,11 @@ function favoritar(id) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             if (data) {
-                data.isFav = !data.isFav;
+                data[0].isFav = !data[0].isFav;
                 $.ajax({
                     type: 'put',
                     url: currentPage.routes,
-                    data: JSON.stringify(data),
+                    data: JSON.stringify(data[0]),
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
                         listar();
@@ -288,6 +290,8 @@ function favoritar(id) {
         },
         error: function (res) { }
     });
+
+    listar();
 }
 
 function setPage(pageName) {

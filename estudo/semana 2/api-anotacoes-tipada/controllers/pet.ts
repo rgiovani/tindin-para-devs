@@ -1,38 +1,34 @@
 import { Request, Response } from 'express';
 
 import { validateResponse } from '../libs/validators';
-import * as noteService from '../services/note';
-
-const listFavorites = async (req: Request<any>, res: Response<any>) => {
-    const notes = await noteService.findFavorites()
-    return res.json(notes)
-}
+import * as petService from '../services/pet';
 
 const list = async (req: Request<any>, res: Response<any>) => {
-    const notes = await noteService.list()
-    return res.json(notes)
+    const age = Number(req.query.age)
+    const pets = await petService.list(age)
+    return res.json(pets)
 }
 
 const get = async (req: Request<any>, res: Response<any>) => {
     const id = req.params.id
     if (!id) return res.status(400).json({ message: 'Informe o campo id!' })
 
-    validateResponse(res, noteService.get, id);
+    validateResponse(res, petService.get, id);
 }
 
 const create = async (req: Request<any>, res: Response<any>) => {
-    const { title, description } = req.body
+    const { name, age, owner } = req.body
 
-    validateResponse(res, noteService.create, { title, description });
+    validateResponse(res, petService.create, { name, age, owner });
 }
 
 const update = async (req: Request<any>, res: Response<any>) => {
-    const { id, title, description, isFav } = req.body
+    const { id, name, age, owner } = req.body
 
     if (!id) {
         return res.status(400).json({ message: 'Informe o campo id!' })
     }
-    validateResponse(res, noteService.update, { id, title, description, isFav })
+    validateResponse(res, petService.update, { id, name, age, owner })
 }
 
 const remove = async (req: Request<any>, res: Response<any>) => {
@@ -42,11 +38,10 @@ const remove = async (req: Request<any>, res: Response<any>) => {
         return res.status(400).json({ message: 'Informe o campo id!' })
     }
 
-    validateResponse(res, noteService.remove, id)
+    validateResponse(res, petService.remove, id)
 }
 
 export {
-    listFavorites,
     list,
     get,
     create,
