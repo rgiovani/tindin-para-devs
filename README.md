@@ -25,7 +25,7 @@
 - [x] Organizando seu projeto back
 - [x] Mais poder para o frontend com Angular
 - [x] Banco de dados relacional (MySQL)
-- [] Trocando parâmetros entre páginas no front
+- [x] Trocando parâmetros entre páginas no front
 - [] Atividade #2 - Cadastro de aulas
 
 Informações sobre o evento: 
