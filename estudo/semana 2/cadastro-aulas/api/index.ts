@@ -3,6 +3,7 @@ import cors from 'cors'
 import * as dotenv from 'dotenv'
 
 import usersRoutes from './routes/user'
+import lessonsRoutes from './routes/lesson'
 
 dotenv.config()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(cors())
 
 usersRoutes(app)
+lessonsRoutes(app)
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: API rodando em http://localhost:${PORT}`)

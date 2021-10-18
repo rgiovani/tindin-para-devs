@@ -1,8 +1,9 @@
 import { IUser } from './../types/IUser';
 import * as db from '../libs/mysql'
 import { convertDataToObject } from '../libs/utils';
+import { crudService } from './service';
 
-const usersOnline: Array<string> = [] //Em memória
+const tableName = 'users'
 
 const login = async (user: IUser) => {
     const { email, password } = user
@@ -15,7 +16,7 @@ const login = async (user: IUser) => {
         throw new Error("Informe o campo do password");
     }
 
-    const userInDatabase = convertDataToObject((await db.execute('select * from users where email=? and password=?', [email, password])).rowns)
+    const userInDatabase = convertDataToObject((await db.execute(`select * from ${tableName} where email=? and password=?`, [email, password])).rowns)
     const isOnline = convertDataToObject((await db.execute('select * from users_online where email=?', [email])).rowns)
 
     if (userInDatabase.length === 0)
@@ -43,7 +44,7 @@ const logout = async (user: IUser) => {
         throw new Error("Informe o campo do password");
     }
 
-    const userInDatabase = convertDataToObject((await db.execute('select * from users where email=? and password=?', [email, password])).rowns)
+    const userInDatabase = convertDataToObject((await db.execute(`select * from ${tableName} where email=? and password=?`, [email, password])).rowns)
     const isOnline = convertDataToObject((await db.execute('select * from users_online where email=?', [email])).rowns)
 
     if (userInDatabase.length === 0)
@@ -57,24 +58,9 @@ const logout = async (user: IUser) => {
     return { success: true }
 }
 
-const list = async () => {
-    const result = await db.execute('select * from users')
-    return result.rowns;
-}
+const list = crudService(tableName).list
 
-const get = async (id: string) => {
-    if (!id) {
-        throw new Error("Informe o campo do id!");
-    }
-
-    const user = convertDataToObject((await db.execute('select * from users where id=?', [id])).rowns)
-
-    if (user.length === 0) {
-        throw new Error(`Nenhum usuário encontrado com o id ${id}`);
-    }
-
-    return user[0];
-}
+const get = crudService(tableName).get
 
 const create = async (user: IUser) => {
     if (!user.email) {
@@ -85,23 +71,12 @@ const create = async (user: IUser) => {
         throw new Error("Informe o campo password");
     }
 
-    await db.execute(
-        'insert into users (email, password, createdAt, updatedAt) values (?, ?, ?, ?)',
-        [user.email, user.password, new Date(), new Date()]
-    )
-
-    return true;
+    return crudService(tableName).create(user)
 }
 
 const update = async (user: IUser) => {
     if (!user.id) {
         throw new Error("Informe o campo id!");
-    }
-
-    const userFounded = convertDataToObject((await db.execute('select * from users where id=?', [user.id])).rowns)
-
-    if (userFounded.length === 0) {
-        throw new Error(`Nenhum usuário encontrado com o id ${user.id}`);
     }
 
     if (!user.email) {
@@ -112,29 +87,10 @@ const update = async (user: IUser) => {
         throw new Error("Informe o campo password!");
     }
 
-    await db.execute(
-        'update users set email=?, password=?, updatedAt=? where id=?',
-        [user.email, user.password, new Date(), user.id]
-    )
-
-    return true;
+    return crudService(tableName).update(user)
 }
 
-const remove = async (id: string) => {
-    if (!id) {
-        throw new Error("Informe o campo id!");
-    }
-
-    const user = convertDataToObject((await db.execute('select * from users where id=?', [id])).rowns)
-
-    if (user.length === 0) {
-        throw new Error(`Nenhum usuário encontrado com o id ${id}`)
-    }
-
-    await db.execute('delete from users where id=?', [id])
-
-    return true;
-}
+const remove = crudService(tableName).remove
 
 export {
     login,

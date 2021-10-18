@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-
-import { validateResponse } from '../libs/validators';
+import { crudController } from "./controller";
 import * as userService from '../services/user';
+import { Request, Response } from "express";
+import { validateResponse } from "../libs/validators";
 
 const login = async (req: Request<any>, res: Response<any>) => {
     const { email, password } = req.body
@@ -13,37 +13,11 @@ const logout = async (req: Request<any>, res: Response<any>) => {
     validateResponse(res, userService.logout, { email, password });
 }
 
-const list = async (req: Request<any>, res: Response<any>) => {
-    return res.json(await userService.list())
-}
-
-const get = async (req: Request<any>, res: Response<any>) => {
-    const id = req.params.id
-    if (!id) return res.status(400).json({ message: 'Informe o campo id!' })
-
-    validateResponse(res, userService.get, id);
-}
-
-const create = async (req: Request<any>, res: Response<any>) => {
-    const { email, password } = req.body
-    validateResponse(res, userService.create, { email, password });
-}
-
-const update = async (req: Request<any>, res: Response<any>) => {
-    const { id, email, password } = req.body
-    if (!id) {
-        return res.status(400).json({ message: 'Informe o campo id!' })
-    }
-    validateResponse(res, userService.update, { id, email, password })
-}
-
-const remove = async (req: Request<any>, res: Response<any>) => {
-    const { id } = req.body
-    if (!id) {
-        return res.status(400).json({ message: 'Informe o campo id!' })
-    }
-    validateResponse(res, userService.remove, id)
-}
+const list = crudController(userService).list;
+const get = crudController(userService).get;
+const create = crudController(userService, ["email", "password"]).create;
+const update = crudController(userService, ["id", "email", "password"]).update;
+const remove = crudController(userService).remove;
 
 export {
     login,
@@ -52,5 +26,5 @@ export {
     get,
     create,
     update,
-    remove
+    remove,
 }
