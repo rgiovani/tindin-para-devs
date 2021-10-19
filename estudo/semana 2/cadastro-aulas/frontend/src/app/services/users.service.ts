@@ -10,6 +10,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class UsersService {
+  private currentUserInfo: any
+
   private readonly url = environment.url
 
   constructor(
@@ -26,6 +28,7 @@ export class UsersService {
   }
 
   login(user: any): Observable<any> {
+
     return this.httpClient.post<any>(`${this.url}/user/login`, { email: user.email, password: user.password })
       .pipe(
         map(response => response),
@@ -35,5 +38,19 @@ export class UsersService {
       )
   }
 
+  logout(): Observable<any> {
+    const { email, password } = this.currentUserInfo
 
+    return this.httpClient.delete<any>(`${this.url}/user/logout`, { body: { email, password } })
+      .pipe(
+        map(response => response),
+        catchError((e: any) => {
+          return throwError(e);
+        })
+      )
+  }
+
+  setCurrentUserInfo(user: any) {
+    this.currentUserInfo = user;
+  }
 }

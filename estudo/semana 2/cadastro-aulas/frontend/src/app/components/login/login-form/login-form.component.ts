@@ -39,6 +39,7 @@ export class LoginFormComponent implements OnInit {
   login(inputs: any): any {
     this.usersService.login(inputs).subscribe((data: any) => {
       if (!!data.success) {
+        this.usersService.setCurrentUserInfo(inputs)
         this.router.navigate([
           'main'
         ])

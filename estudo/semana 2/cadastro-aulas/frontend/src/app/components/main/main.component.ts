@@ -1,3 +1,4 @@
+import { UsersService } from './../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,16 +10,29 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly usersService: UsersService,
   ) { }
 
   ngOnInit(): void {
   }
 
-  nextPage(): Promise<boolean> {
-    return this.router.navigate([
-      'login'
-    ])
+  logout(): any {
+    this.usersService.logout().subscribe((data: any) => {
+      if (!!data.success) {
+        this.usersService.setCurrentUserInfo(null)
+        this.router.navigate([
+          'login'
+        ])
+      }
+    }, (apiError: any) => {
+      console.log(apiError)
+      let message = ""
+      if (apiError.error?.message) {
+        message = apiError.error?.message
+      }
+      window.alert(message);
+    })
   }
 
 }
