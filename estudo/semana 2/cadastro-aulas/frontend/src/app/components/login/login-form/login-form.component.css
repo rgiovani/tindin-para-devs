@@ -1,0 +1,27 @@
+input[type='submit'],
+
+.form-group {}
+
+.form-email {}
+
+.form-email-label {
+  text-align: left;
+  display: block;
+  font: .9rem 'Fira Sans', sans-serif;
+}
+
+.form-email-input {}
+
+.form-pass {}
+
+.form-pass-label {
+  display: block;
+  margin-top: 1rem;
+  font: .9rem 'Fira Sans', sans-serif;
+}
+
+.form-pass-input {}
+
+#loginButton {
+  margin-top: 1rem;
+}
