@@ -1,10 +1,10 @@
 <form [formGroup]="formUser" (ngSubmit)="onSubmit()">
 
   <div class="form-group">
-    <h2>Login </h2>
+    <h2> Entre com a sua conta </h2>
 
     <div class="form-email">
-      <label class="form-email-label" for="email">E-mail</label>
+      <label class="form-email-label" for="email">E-mail:</label>
       <input class="form-email-input" type="email" name="email" id="email" formControlName="email">
     </div>
 
@@ -14,7 +14,9 @@
         formControlName="password">
     </div>
 
-    <input id="loginButton" type="submit" value="Sign in">
+    <div class="form-login-button">
+      <input id="loginButton" type="submit" value="LOGIN">
+    </div>
   </div>
 
 </form>
