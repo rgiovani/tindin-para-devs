@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +7,19 @@ import { AfterViewInit, Component, ElementRef } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-  constructor(private elementRef: ElementRef) {
+  constructor(private readonly router: Router, private elementRef: ElementRef) {
 
   }
   ngAfterViewInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#A89FE9';
   }
+
+  ngOnInit(): void {
+    this.router.navigate([
+      'login'
+    ])
+  }
+
 
   title = 'Cadastro de aulas';
 }

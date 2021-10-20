@@ -1,3 +1,41 @@
-<p>main works!</p>
-
 <button (click)="logout()">logoff</button>
+
+<div class="class-container">
+  <div class="class-container-header">
+    <div class="class-container-header-info">
+      <h1>Tindin Class</h1>
+      <p>Listagem de aulas cadastradas</p>
+      <p>{{lessons.length}} registros encontrados</p>
+    </div>
+
+    <div class="add-lesson">
+      <button id="addLessonButton" type="submit">
+        Nova aula
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="class-container-content">
+    <div *ngIf="lessons.length > 0">
+      <div class="collection">
+        <div class="collection-card" *ngFor="let lesson of lessons">
+
+          <h1 class="collection-card-title">{{lesson.title}}</h1>
+          <p class="collection-card-description">{{lesson.description}}</p>
+          <div class="collection-card-date">
+            Cadastrado em
+            <div>{{lesson.createdAt}}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-empty" *ngIf="lessons.length == 0">
+      <h1 class="collection-empty-message">Nenhuma aula encontrada</h1>
+    </div>
+  </div>
+
+</div>

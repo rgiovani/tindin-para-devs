@@ -23,6 +23,12 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm()
+    if (localStorage.getItem('currentUserInfo') !== null) {
+      this.router.navigate([
+        'main'
+      ])
+    }
+    //criar uma funcionalidade que deslogue todo mundo
   }
 
   createForm() {
@@ -40,6 +46,9 @@ export class LoginFormComponent implements OnInit {
     this.usersService.login(inputs).subscribe((data: any) => {
       if (!!data.success) {
         this.usersService.setCurrentUserInfo(inputs)
+        localStorage.setItem('currentUserInfo',
+          `{"email": "${inputs.email}", "password": "${inputs.password}"}`
+        );
         this.router.navigate([
           'main'
         ])

@@ -28,7 +28,6 @@ export class UsersService {
   }
 
   login(user: any): Observable<any> {
-
     return this.httpClient.post<any>(`${this.url}/user/login`, { email: user.email, password: user.password })
       .pipe(
         map(response => response),
@@ -39,15 +38,23 @@ export class UsersService {
   }
 
   logout(): Observable<any> {
-    const { email, password } = this.currentUserInfo
+    this.currentUserInfo = localStorage.getItem('currentUserInfo')
+    this.currentUserInfo = JSON.parse(this.currentUserInfo)
 
-    return this.httpClient.delete<any>(`${this.url}/user/logout`, { body: { email, password } })
+    return this.httpClient.delete<any>(`${this.url}/user/logout`, {
+      body:
+        { email: this.currentUserInfo?.email, password: this.currentUserInfo?.password }
+    })
       .pipe(
         map(response => response),
         catchError((e: any) => {
           return throwError(e);
         })
       )
+  }
+
+  getCurrentUserinfo() {
+    return this.currentUserInfo
   }
 
   setCurrentUserInfo(user: any) {
