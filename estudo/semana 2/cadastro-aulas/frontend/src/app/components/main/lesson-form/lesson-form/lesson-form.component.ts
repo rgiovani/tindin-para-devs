@@ -53,7 +53,7 @@ export class LessonFormComponent implements OnInit {
     if (!this.isEditing) {
       this.createLesson(this.formLesson.value)
     } else {
-
+      this.editLesson()
     }
   }
 
@@ -89,6 +89,22 @@ export class LessonFormComponent implements OnInit {
       this.router.navigateByUrl('/main', { skipLocationChange: true }).then(() => {
         this.router.navigate(['login']);
       });
+    }, (apiError: any) => {
+      let message = ""
+      if (apiError.error?.message) {
+        message = apiError.error?.message
+      }
+      window.alert(message);
+    })
+  }
+
+  editLesson() {
+    this.lessonsService.editLesson(this.mainComponent.currentEditLesson, this.formLesson.value).subscribe((data: any) => {
+      this.mainComponent.isFormOpen = false;
+      this.router.navigateByUrl('/main', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['login']);
+      });
+      this.isEditing = false
     }, (apiError: any) => {
       let message = ""
       if (apiError.error?.message) {

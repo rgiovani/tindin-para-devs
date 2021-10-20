@@ -40,5 +40,16 @@ export class LessonsService {
     return this.httpClient.get<any[]>(`${this.url}/lessons`)
   }
 
+  editLesson(lesson: any, inputs: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.url}/lesson/edit`,
+      { id: lesson.id, title: inputs.title, description: inputs.description }
+    ).pipe(
+      map(response => response),
+      catchError((e: any) => {
+        return throwError(e);
+      })
+    )
+  }
+
 
 }
