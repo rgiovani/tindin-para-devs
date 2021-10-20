@@ -11,8 +11,10 @@ import { UsersService } from './../../services/users.service';
 })
 export class MainComponent implements OnInit {
   lessons: any[] = []
-
   lessonsLength: number = 0
+  isFormOpen: boolean = false
+  currentEditLesson: any
+
   constructor(
     private readonly router: Router,
     private readonly usersService: UsersService,
@@ -20,21 +22,9 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listLessons()
     this.lessonsLength = this.lessons.length
-  }
-
-  //Essa regra de negócio deve estar dentro do forms de criação de aulas
-  createLesson(lesson: any) {
-    this.lessonsService.createLesson(lesson).subscribe((data: any) => {
-      console.log(data)
-    }, (apiError: any) => {
-      let message = ""
-      if (apiError.error?.message) {
-        message = apiError.error?.message
-      }
-      window.alert(message);
-    })
+    this.lessons = []
+    this.listLessons()
   }
 
   listLessons() {
@@ -44,9 +34,15 @@ export class MainComponent implements OnInit {
         data.forEach((lesson: any) => {
           this.lessons.push(lesson)
         });
+
       }
     }, (apiError: any) => {
     })
+  }
+
+  edit(lesson: any) {
+    this.currentEditLesson = lesson
+    this.isFormOpen = true
   }
 
   logout(): any {
@@ -65,6 +61,11 @@ export class MainComponent implements OnInit {
     this.router.navigate([
       'login'
     ])
+  }
+
+  openForm() {
+    this.currentEditLesson = undefined
+    this.isFormOpen = true
   }
 
 }

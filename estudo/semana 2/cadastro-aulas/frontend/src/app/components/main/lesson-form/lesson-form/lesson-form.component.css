@@ -1,0 +1,116 @@
+input[type='submit'],
+
+
+.form-group {
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.form-title {
+
+}
+
+.form-title-label {
+  display: block;
+  color: #636B7B;
+  font: .9rem sans-serif;
+  font-weight: bolder;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+.form-title-input {
+  background-color: #636B7B;
+  color: white;
+  padding-top: 5px;
+  width: 450px;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 16px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.form-description-label {
+  display: block;
+  color: #636B7B;
+  font: .9rem sans-serif;
+  font-weight: bolder;
+  margin-top: 1rem;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+.form-description-input {
+  background-color: #636B7B;
+  color: white;
+  font-size: 16px;
+
+  resize: none;
+
+  width: 450px;
+  height: 150px;
+  border: 0px;
+  border-radius: 5px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.form-container-buttons{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-left: 250px;
+}
+
+.form-confirm-button{
+  position: absolute;
+  text-align: center;
+  padding-left: 170px;
+}
+
+#confirmButton {
+  background-color: transparent;
+  color: rgb(43, 199, 103);
+  margin-top: 2rem;
+  font-size: 35px;
+  border: 0px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.form-cancel-button{
+  margin-left: 20px;
+}
+
+#cancelButton {
+  background-color: transparent;
+  color: white;
+  margin-top: 2rem;
+  font-size: 35px;
+  border: 0px;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.form-delete-button{
+  position: absolute;
+}
+
+#deleteButton {
+  background-color: transparent;
+  color: rgb(201, 69, 87);
+  margin-top: 2rem;
+  font-size: 35px;
+  border: 0px;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: none;
+}

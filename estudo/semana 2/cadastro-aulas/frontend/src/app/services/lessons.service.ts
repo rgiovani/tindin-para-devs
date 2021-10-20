@@ -17,7 +17,17 @@ export class LessonsService {
   ) { }
 
   createLesson(lesson: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.url}/lesson`, { email: lesson.title, password: lesson.description })
+    return this.httpClient.post<any>(`${this.url}/lesson`, { title: lesson.title, description: lesson.description })
+      .pipe(
+        map(response => response),
+        catchError((e: any) => {
+          return throwError(e);
+        })
+      )
+  }
+
+  deleteLesson(id?: any): Observable<any> {
+    return this.httpClient.delete<any>(`${this.url}/lesson`, { body: { id } })
       .pipe(
         map(response => response),
         catchError((e: any) => {

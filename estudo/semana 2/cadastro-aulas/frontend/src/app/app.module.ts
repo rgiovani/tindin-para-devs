@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
@@ -13,13 +14,15 @@ import { UsersService } from './services/users.service';
 import { LessonsService } from './services/lessons.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LessonFormComponent } from './components/main/lesson-form/lesson-form/lesson-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     LoginPageComponent,
-    MainComponent
+    MainComponent,
+    LessonFormComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     UsersService,
