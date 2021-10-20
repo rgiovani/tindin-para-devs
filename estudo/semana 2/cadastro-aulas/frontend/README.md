@@ -13,8 +13,6 @@ http://localhost:4200
 ### **Importante:**
 - Certifique-se que a api também esteja rodando para que tudo funcione perfeitamente.
 - Para utilizar o login e entrar na aplicação, utilize a rota do backend abaixo, dessa forma você irá inserir um novo usuário no banco com o seus dados:
-<br>
-
   - **criar** -> *(POST)*
     - route: **/user/register**
     - *Body(JSON)*
@@ -28,29 +26,33 @@ http://localhost:4200
 
 <p align="center">
   Tela de login
-  <img src="./src/assets/screenshots/login-screenshot.png" width="450px">
+  <br>
+  <img src="./src/assets/screenshots/login-screenshot.png" width="850px">
 </p>
 <p align="center">
   Tela home, vazia
-  <img src="./src/assets/screenshots/home-empty-screenshot.png" width="450px">
+  <br>
+  <img src="./src/assets/screenshots/home-empty-screenshot.png" width="850px">
 </p>
 
 <p align="center">
   Tela de criação de uma nova aula
-  <img src="./src/assets/screenshots/create-screenshot.png" width="450px">
+  <br>
+  <img src="./src/assets/screenshots/create-screenshot.png" width="850px">
 </p>
 
 <p align="center">
   Tela home, com aula
-  <img src="./src/assets/screenshots/home-screenshot.png" width="450px">
+  <br>
+  <img src="./src/assets/screenshots/home-screenshot.png" width="850px">
 </p>
+
 
 <p align="center">
   Tela de edição/remoção de aula existente
-  <img src="./src/assets/screenshots/edit-screenshot.png" width="450px">
+  <br>
+  <img src="./src/assets/screenshots/edit-screenshot.png" width="850px">
 </p>
-
-
 
 ---
 
