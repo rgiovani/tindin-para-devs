@@ -41,8 +41,6 @@ export class LessonFormComponent implements OnInit {
       description = this.mainComponent.currentEditLesson.description
       this.objEdtting = this.mainComponent.currentEditLesson.id
       this.isEditing = true
-    } else {
-      this.isEditing = false
     }
 
     this.formLesson = this.formBuilder.group({
@@ -78,15 +76,11 @@ export class LessonFormComponent implements OnInit {
   }
 
   cancel() {
-    if (!!this.isEditing) {
-
-    } else {
-      this.mainComponent.isFormOpen = false
-      this.isEditing = false
-      this.router.navigate([
-        'main'
-      ])
-    }
+    this.mainComponent.isFormOpen = false
+    this.isEditing = false
+    this.router.navigate([
+      'main'
+    ])
   }
 
   delete() {
