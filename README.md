@@ -26,7 +26,7 @@
 - [x] Mais poder para o frontend com Angular
 - [x] Banco de dados relacional (MySQL)
 - [x] Trocando parâmetros entre páginas no front
-- [] Atividade #2 - Cadastro de aulas
+- [x] Atividade #2 - Cadastro de aulas
 
 Informações sobre o evento: 
  - https://www.tindin.com.br/post/curso-dev
