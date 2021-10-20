@@ -5,6 +5,13 @@ input[type='submit'],
   width: 100%;
   text-align: center;
   color: white;
+
+  justify-content: center;
+  display: flex;
+}
+
+.page-logo {
+  margin-right: 10px;
 }
 
 .container-title{
@@ -33,6 +40,7 @@ input[type='submit'],
 
   height: fit-content;
 }
+
 .class-container-header{
   padding: 10px;
   padding-left: 100px;
@@ -189,6 +197,12 @@ input[type='submit'],
   .collection  {
     grid-template-columns: repeat(2, 310px);
     grid-template-rows: repeat(auto-fill, 1fr);
+  }
+
+  .class-container {
+    min-height: 500px;
+    min-width: 500px;
+    max-width: 60%;
   }
 }
 

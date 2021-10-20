@@ -1,14 +1,14 @@
-<form [formGroup]="formLesson" (ngSubmit)="onSubmit()">
+<form class="container" [formGroup]="formLesson" (ngSubmit)="onSubmit()">
   <div class="form-cancel-button">
     <button id="cancelButton" (click)="cancel()">
       <fa-icon [icon]="backToMainIcon"></fa-icon>
     </button>
   </div>
   <div class="form-group">
+    <div class="h2-title">
+      <p> Nova aula </p>
+    </div>
     <div class="form-title">
-      <div class="h2-title">
-        <p> Nova aula </p>
-      </div>
       <label class="form-title-label" for="title">Titulo:</label>
       <input class="form-title-input" type="text" name="title" id="title" formControlName="title" maxlength="31">
     </div>
