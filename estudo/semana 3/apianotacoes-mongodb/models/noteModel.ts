@@ -6,8 +6,8 @@ const noteSchema = new mongoose.Schema({
         required: true
     },
     description: String
-})
+}) //define os campos do registro/tabela
 
-const Note = mongoose.model('notes', noteSchema)
+const Note = mongoose.model('notes', noteSchema) //(nome da coleção, os campos que ela vai ter)
 
 export { Note }
