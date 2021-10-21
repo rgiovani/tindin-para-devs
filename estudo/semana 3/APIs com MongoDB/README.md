@@ -27,19 +27,15 @@ Algumas informações importantes sobre o mongoDB e a forma como ele opera.
 *"É basicamente um JSON com super poderes" - Código fonte TV*
 
 ---
-<br>
 
 #### **Para visualizar as databases existentes, utilize:** ```show dbs ou databases```
 
-<br>
+---
 
 ### **Alguns comandos comuns:**
 
-<br>
-
 #### **use:** ```use minhabase``` 
 - Seleciona um banco de dados, se o banco de dados não existir, então o cluster do MongoDB irá criá-lo.
-
 
 <br>
 
@@ -95,9 +91,11 @@ Algumas informações importantes sobre o mongoDB e a forma como ele opera.
 	```
 
 
-### **AGGREGATIONS:** Para agrupar campos, somar valores etc... Basta utilizar as **Aggregations**, um conceito complexo porém muito util do mongo. Existem três modelos de aggregations: **Pipeline**, **Map-Reduce** e **Single Purpose**.
+### **AGGREGATIONS:** 
+- Para agrupar campos, somar valores etc... Basta utilizar as **Aggregations**, um conceito complexo porém muito util do mongo. Existem três modelos de aggregations: **Pipeline**, **Map-Reduce** e **Single Purpose**.
 
 <br>
+
 ---
 
 #### **Links:**
