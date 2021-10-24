@@ -37,7 +37,10 @@ const getById = async (_id: string) => {
     return User.findById(_id)
 }
 
-const listLog = async (userId?: string, page = 1, perPage = 50) => {
+const listLog = async (page: number, perPage: number, userId?: string) => {
+    page = (page) ? page : 1
+    perPage = (perPage) ? perPage : 50
+
     await connect()
     const maxPages = Math.min(perPage, 100)
     const skip = (+page - 1) * (+maxPages)

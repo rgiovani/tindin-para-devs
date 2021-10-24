@@ -6,7 +6,7 @@ const list = async (req: Request<any>, res: Response<any>) => {
     try {
         const { _id: userId } = req.user
         const { page, perPage } = req.query
-        const logs = await user.listLog(userId, Number(page), Number(perPage))
+        const logs = await user.listLog(Number(page), Number(perPage), userId)
         return res.json(logs)
     } catch (err: any) {
         return error(res, err)
