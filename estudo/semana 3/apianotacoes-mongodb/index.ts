@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import * as note from './controllers/note'
 import * as user from './controllers/user'
+import { isLogged } from './libs/middlewareLogin'
 dotenv.config()
 
 const app = express()
@@ -14,11 +15,12 @@ const PORT = 3000
 app.use(express.static('www'))
 
 app.post('/login', user.login)
-app.get('/notes', note.list)
-app.get('/notes/:id', note.get)
-app.post('/notes', note.create)
-app.put('/notes', note.update)
-app.delete('/notes', note.remove)
+
+app.get('/notes', isLogged, note.list)
+app.get('/notes/:id', isLogged, note.get)
+app.post('/notes', isLogged, note.create)
+app.put('/notes', isLogged, note.update)
+app.delete('/notes', isLogged, note.remove)
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: API rodando em http://localhost:${PORT}`)

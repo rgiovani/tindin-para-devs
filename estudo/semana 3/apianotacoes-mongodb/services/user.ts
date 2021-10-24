@@ -14,9 +14,13 @@ const login = async (user: IUser) => {
 
     await connect()
 
-    //await User.create(user)
+    const userLogged = await User.findOne({ email: user.email, password: user.password })
 
-    return true
+    if (!userLogged) {
+        throw new Error("Email ou senha não confere!")
+    }
+
+    return userLogged
 
 }
 
