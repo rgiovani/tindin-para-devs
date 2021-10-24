@@ -5,9 +5,11 @@ import { Note } from '../models/noteModel'
 import { Log } from "../models/logModel"
 
 
-const list = async (userId?: string) => {
+const list = async (userId?: string, page = 1, perPage = 50) => {
     await connect()
-    const result = await Note.find()
+    const maxPages = Math.min(perPage, 100)
+    const skip = (+page - 1) * (+maxPages)
+    const result = await Note.find().skip(skip).limit(maxPages)
     await Log.create({ user: userId, description: 'listagem de anotacoes' })
     return result
 }
