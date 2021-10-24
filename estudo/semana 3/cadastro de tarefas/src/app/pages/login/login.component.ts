@@ -3,12 +3,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { LoginService } from './../../services/login.service';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup
@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit {
     const data = this.form.getRawValue()
     this.loginService.login({ email: data.email, password: data.password }).subscribe(
       async (res: any) => {
-        sessionStorage.setItem('aula-oath', res.token)
-        return this.router.navigate(['/main'])
+        sessionStorage.setItem('token', res.token)
+        return this.router.navigate(['/notes'])
       },
       (err: any) => {
         this.loading = false

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { Credential } from '../model/Credential.model'
+import { Credential } from '../../model/Credential.model'
 
 
 @Injectable({
@@ -22,5 +22,9 @@ export class LoginService {
         email: credentials.email,
         password: credentials.password
       })
+  }
+
+  public getToken(): string {
+    return sessionStorage.getItem('token') ?? ''
   }
 }
