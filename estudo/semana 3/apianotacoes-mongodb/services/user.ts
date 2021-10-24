@@ -1,4 +1,5 @@
 import { connect } from '../libs/mongodb'
+import { sign } from 'jsonwebtoken'
 
 import { IUser } from "../types/IUser"
 import { User } from '../models/UserModel'
@@ -20,7 +21,13 @@ const login = async (user: IUser) => {
         throw new Error("Email ou senha não confere!")
     }
 
-    return { token: userLogged._id }
+    const token = sign({
+        userId: userLogged._id,
+        name: userLogged.name,
+        email: userLogged.email
+    }, process.env.JWT_SECRET ?? 'emptyjwt', {})
+
+    return { token }
 }
 
 const getById = async (_id: string) => {
