@@ -33,8 +33,8 @@
 - [x] APIs com Mongodb
 - [x] Rotina login
 - [x] Segurança com JWT
-- [] Front Login
-- [] Paginação e logs na API
+- [x] Front Login
+- [x] Paginação e logs na API
 - [] Front com paginação
 - [] Atividade #3 - Cadastro de tarefas
 
