@@ -4,7 +4,8 @@ import { error } from '../libs/bindError'
 
 const list = async (req: Request<any>, res: Response<any>) => {
     try {
-        const notes = await note.list()
+        const { _id: userId } = req.user
+        const notes = await note.list(userId)
         return res.json(notes)
     } catch (err: any) {
         return error(res, err)
@@ -13,10 +14,12 @@ const list = async (req: Request<any>, res: Response<any>) => {
 
 const get = async (req: Request<any>, res: Response<any>) => {
     try {
-        const id = req.params.id
-        if(!id) return res.status(400).json({ message: 'Informe o campo id!' })    
+        const { _id: userId } = req.user
 
-        const noteFound = await note.get(id)
+        const noteId = req.params.id
+        if (!noteId) return res.status(400).json({ message: 'Informe o campo id!' })
+
+        const noteFound = await note.get(noteId, userId)
         res.json(noteFound)
     } catch (err: any) {
         return error(res, err)
@@ -26,20 +29,24 @@ const get = async (req: Request<any>, res: Response<any>) => {
 
 const create = async (req: Request<any>, res: Response<any>) => {
     try {
+        const { _id: userId } = req.user
+
         const title = req.body.title
         const description = req.body.description
 
-        const noteCreated = await note.create({ title, description })
+        const noteCreated = await note.create({ title, description }, userId)
         return res.json(noteCreated)
     } catch (err: any) {
         return error(res, err)
     }
 
-  
+
 }
 
 const update = async (req: Request<any>, res: Response<any>) => {
     try {
+        const { _id: userId } = req.user
+
         const id = req.body.id
         const title = req.body.title
         const description = req.body.description
@@ -48,7 +55,7 @@ const update = async (req: Request<any>, res: Response<any>) => {
             return res.status(400).json({ message: 'Informe o campo id!' })
         }
 
-        const noteUpdated = await note.update({ id, title, description })
+        const noteUpdated = await note.update({ id, title, description }, userId)
         return res.json(noteUpdated)
     } catch (err: any) {
         return error(res, err)
@@ -58,13 +65,15 @@ const update = async (req: Request<any>, res: Response<any>) => {
 
 const remove = async (req: Request<any>, res: Response<any>) => {
     try {
-        const id = req.body.id
+        const { _id: userId } = req.user
 
-        if (!id) {
+        const noteId = req.body.id
+
+        if (!noteId) {
             return res.status(400).json({ message: 'Informe o campo id!' })
         }
 
-        await note.remove(id)
+        await note.remove(noteId, userId)
         res.json({ success: true })
 
     } catch (err: any) {
@@ -74,8 +83,8 @@ const remove = async (req: Request<any>, res: Response<any>) => {
 
 export {
     list,
-    get, 
+    get,
     create,
-    update, 
+    update,
     remove
 }

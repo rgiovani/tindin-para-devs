@@ -1,14 +1,18 @@
-import { INote } from "../types/INote"
 import { connect } from '../libs/mongodb'
-import { Note } from '../models/noteModel'
 
-const list = async () => {
+import { INote } from "../types/INote"
+import { Note } from '../models/noteModel'
+import { Log } from "../models/logModel"
+
+
+const list = async (userId?: string) => {
     await connect()
     const result = await Note.find()
+    await Log.create({ user: userId, description: 'listagem de anotacoes' })
     return result
 }
 
-const get = async (id: string) => {
+const get = async (id: string, userId?: string) => {
     if (!id) {
         throw new Error("Informe o campo id!")
     }
@@ -19,10 +23,12 @@ const get = async (id: string) => {
         throw new Error("Nenhuma anotação encontrada para o id informado!")
     }
 
+    await Log.create({ user: userId, description: 'listagem de anotacoes por id' })
+
     return note
 }
 
-const create = async (note: INote) => {
+const create = async (note: INote, userId?: string) => {
     if (!note.title) {
         throw new Error("Informe o campo title!")
     }
@@ -33,11 +39,13 @@ const create = async (note: INote) => {
 
     await Note.create(note)
 
-    return true
 
+    await Log.create({ user: userId, description: 'criacao de anotacao' })
+
+    return true
 }
 
-const update = async (note: INote) => {
+const update = async (note: INote, userId?: string) => {
     if (!note.id) {
         throw new Error("Informe o campo id!")
     }
@@ -56,10 +64,12 @@ const update = async (note: INote) => {
         throw new Error("Nenhuma anotação encontrada para o id informado!")
     }
 
+    await Log.create({ user: userId, description: 'atualizacao de anotacao' })
+
     return true
 }
 
-const remove = async (id: string) => {
+const remove = async (id: string, userId?: string) => {
     if (!id) {
         throw new Error("Informe o campo id!")
     }
@@ -68,6 +78,8 @@ const remove = async (id: string) => {
     if (!note) {
         throw new Error("Nenhuma anotação encontrada para o id informado!")
     }
+
+    await Log.create({ user: userId, description: 'remocao de anotacao' })
 
     return true
 }

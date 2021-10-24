@@ -20,8 +20,7 @@ const login = async (user: IUser) => {
         throw new Error("Email ou senha não confere!")
     }
 
-    return userLogged
-
+    return { token: userLogged._id }
 }
 
 const getById = async (_id: string) => {
