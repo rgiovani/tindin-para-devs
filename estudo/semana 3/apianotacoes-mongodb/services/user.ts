@@ -24,6 +24,13 @@ const login = async (user: IUser) => {
 
 }
 
+const getById = async (_id: string) => {
+    await connect()
+    return User.findById(_id)
+}
+
+
 export {
-    login
+    login,
+    getById
 }
