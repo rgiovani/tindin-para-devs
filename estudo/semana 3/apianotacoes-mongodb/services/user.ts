@@ -2,7 +2,9 @@ import { connect } from '../libs/mongodb'
 import { sign } from 'jsonwebtoken'
 
 import { IUser } from "../types/IUser"
+
 import { User } from '../models/UserModel'
+import { Log } from '../models/logModel'
 
 const login = async (user: IUser) => {
     if (!user.email) {
@@ -35,8 +37,17 @@ const getById = async (_id: string) => {
     return User.findById(_id)
 }
 
+const listLog = async (userId?: string, page = 1, perPage = 50) => {
+    await connect()
+    const maxPages = Math.min(perPage, 100)
+    const skip = (+page - 1) * (+maxPages)
+    const result = await Log.find().populate('user', 'name email').skip(skip).limit(maxPages)
+    await Log.create({ user: userId, description: 'listagem de logs' })
+    return result
+}
 
 export {
     login,
-    getById
+    getById,
+    listLog
 }
