@@ -22,7 +22,7 @@ const login = async (user: IUser) => {
     }
 
     const token = sign({
-        userId: userLogged._id,
+        _id: userLogged._id,
         name: userLogged.name,
         email: userLogged.email
     }, process.env.JWT_SECRET ?? 'emptyjwt', {})
