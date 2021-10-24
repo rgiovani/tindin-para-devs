@@ -28,5 +28,15 @@
 - [x] Trocando parâmetros entre páginas no front
 - [x] Atividade #2 - Cadastro de aulas
 
+### **SEMANA 3**
+
+- [x] APIs com Mongodb
+- [x] Rotina login
+- [x] Segurança com JWT
+- [] Front Login
+- [] Paginação e logs na API
+- [] Front com paginação
+- [] Atividade #3 - Cadastro de tarefas
+
 Informações sobre o evento: 
  - https://www.tindin.com.br/post/curso-dev
