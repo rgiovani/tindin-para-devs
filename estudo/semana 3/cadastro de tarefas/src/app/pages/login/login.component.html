@@ -1,0 +1,56 @@
+<div class="w-full h-full image-bg" fxLayout="column" fxLayoutAlign="center center">
+  <div class="w-full h-full bg-pattern-local" fxLayout="column" fxLayoutAlign="center center">
+    <div class="card overflow-hidden bg-white w-full max-w-xs round-border">
+
+      <div class="p-6 pb-0 title-login" fxLayout="column" fxLayoutAlign="center center">
+        LOGIN
+      </div>
+
+
+      <div class="p-6" fxLayout="column" fxLayoutGap="16px">
+        <form autocomplete="nope" [formGroup]="form" fxFlex="auto" fxLayout="column">
+
+          <mat-form-field fxFlex="grow" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input type="text" autocomplete="nope" formControlName="email" matInput required>
+            <mat-error *ngIf="form?.get('email')?.hasError('required')">
+              Qual E-mail para fazer o login
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="grow" appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input [type]="inputType" autocomplete="nope" formControlName="password" matInput required>
+            <button (click)="toggleVisibility()" mat-icon-button matSuffix
+              matToolTip="{{visible ? 'Esconder senha : 'Visualizar senha'}}" type="button">
+              <mat-icon *ngIf="visible">visibility</mat-icon>
+              <mat-icon *ngIf="!visible">visibility_off</mat-icon>
+            </button>
+            <mat-error *ngIf="form?.get('password')?.hasError('required')">
+              Precisamos de uma senha para fazer o seu login
+            </mat-error>
+          </mat-form-field>
+        </form>
+
+        <a [routerLink]="['/forgot-password']" class="caption forget">Esqueceu a senha?</a>
+
+        <button *ngIf="!loading" (click)="send()" class="rounded-full py-1 px-3 w-full orange-bg" color="primary"
+          mat-raised-button type="submit">
+          ENTRAR
+        </button>
+
+        <div fxLayoutAlign="center center">
+          <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
+        </div>
+
+        <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
+          <div class="fill-current text-center">
+            <img class="w-32" src="">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
