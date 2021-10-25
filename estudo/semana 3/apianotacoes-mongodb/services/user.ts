@@ -1,5 +1,6 @@
 import { connect } from '../libs/mongodb'
 import { sign } from 'jsonwebtoken'
+import bcrypt from 'bcrypt';
 
 import { IUser } from "../types/IUser"
 
@@ -17,19 +18,53 @@ const login = async (user: IUser) => {
 
     await connect()
 
-    const userLogged = await User.findOne({ email: user.email, password: user.password })
+    const userRegistered = await User.findOne({ email: user.email })
+    if (!userRegistered) {
+        throw new Error("Usuario não cadastrado")
+    }
 
-    if (!userLogged) {
-        throw new Error("Email ou senha não confere!")
+    let isPassValid = await bcrypt.compare(user.password, userRegistered.password);
+
+    if (!isPassValid) {
+        throw new Error("Senha incorreta!")
     }
 
     const token = sign({
-        _id: userLogged._id,
-        name: userLogged.name,
-        email: userLogged.email
+        _id: userRegistered._id,
+        name: userRegistered.name,
+        email: userRegistered.email
     }, process.env.JWT_SECRET ?? 'emptyjwt', {})
 
     return { token }
+}
+
+const register = async (user: IUser) => {
+    if (!user.name) {
+        throw new Error("Informe o campo name!")
+    }
+
+    if (!user.email) {
+        throw new Error("Informe o campo email!")
+    }
+
+    if (!user.password) {
+        throw new Error("Informe o campo password!")
+    }
+
+    await connect()
+
+    const userRegistered = await User.findOne({ email: user.email })
+    if (userRegistered) {
+        throw new Error("Usuario já cadastrado")
+    }
+
+    const saltRounds = 10;
+    bcrypt.hash(user.password, saltRounds).then(async function (hash) {
+        user.password = hash
+        return await User.create(user)
+    });
+
+    return true
 }
 
 const getById = async (_id: string) => {
@@ -51,6 +86,7 @@ const listLog = async (page: number, perPage: number, userId?: string) => {
 
 export {
     login,
+    register,
     getById,
     listLog
 }

@@ -16,6 +16,8 @@ const PORT = 3000
 app.use(express.static('www'))
 
 app.post('/login', user.login)
+app.post('/register', user.register)
+
 
 app.get('/notes', isLogged, note.list)
 app.get('/notes/:id', isLogged, note.get)
