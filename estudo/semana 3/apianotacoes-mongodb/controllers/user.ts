@@ -25,10 +25,22 @@ const register = async (req: Request<any>, res: Response<any>) => {
     } catch (err: any) {
         return error(res, err)
     }
+}
 
+const recoverAccount = async (req: Request<any>, res: Response<any>) => {
+    try {
+        const email = req.body.email
+        const password = req.body.password
+
+        const userUpdated = await userService.recoverAccount({ email, password })
+        return res.json(userUpdated)
+    } catch (err: any) {
+        return error(res, err)
+    }
 }
 
 export {
     login,
-    register
+    register,
+    recoverAccount
 }

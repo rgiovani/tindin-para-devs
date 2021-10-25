@@ -58,10 +58,36 @@ const register = async (user: IUser) => {
         throw new Error("Usuario já cadastrado")
     }
 
-    const saltRounds = 10;
+    const saltRounds = 10
     bcrypt.hash(user.password, saltRounds).then(async function (hash) {
         user.password = hash
         return await User.create(user)
+    });
+
+    return true
+}
+
+const recoverAccount = async (user: IUser) => {
+    if (!user.email) {
+        throw new Error("Informe o campo email!")
+    }
+
+    if (!user.password) {
+        throw new Error("Informe o campo password!")
+    }
+
+    await connect()
+
+    const userRegistered = await User.findOne({ email: user.email })
+
+    if (!userRegistered) {
+        throw new Error("Usuario não cadastrado")
+    }
+
+    const saltRounds = 10
+    bcrypt.hash(user.password, saltRounds).then(async function (hash) {
+        user.password = hash
+        return await User.findByIdAndUpdate(userRegistered.id, user)
     });
 
     return true
@@ -87,6 +113,7 @@ const listLog = async (page: number, perPage: number, userId?: string) => {
 export {
     login,
     register,
+    recoverAccount,
     getById,
     listLog
 }

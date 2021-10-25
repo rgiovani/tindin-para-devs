@@ -17,7 +17,7 @@ app.use(express.static('www'))
 
 app.post('/login', user.login)
 app.post('/register', user.register)
-
+app.post('/recover', user.recoverAccount)
 
 app.get('/notes', isLogged, note.list)
 app.get('/notes/:id', isLogged, note.get)
