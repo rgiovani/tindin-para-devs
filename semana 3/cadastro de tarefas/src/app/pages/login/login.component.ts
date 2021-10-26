@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login({ email: data.email, password: data.password }).subscribe(
       async (res: any) => {
         sessionStorage.setItem('token', res.token)
-        return this.router.navigate(['/notes'])
+        return this.router.navigate(['/tasks'])
       },
       (err: any) => {
         this.loading = false
