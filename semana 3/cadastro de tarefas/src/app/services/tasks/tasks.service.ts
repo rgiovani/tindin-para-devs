@@ -3,39 +3,39 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { iNotesCreate, iNotesDelete, iNotesEdit } from '../model/notes.model';
+import { iTasksCreate, iTasksDelete, iTasksEdit } from '../../model/tasks.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotesService {
+export class TaskService {
   private readonly url = environment.url
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  public createNote(data: iNotesCreate): Observable<any> {
+  public createTask(data: iTasksCreate): Observable<any> {
     return this.httpClient.post(
-      `${this.url}/notes`,
+      `${this.url}/tasks`,
       data
     )
   }
 
-  public editNote(data: iNotesEdit): Observable<any> {
+  public editTask(data: iTasksEdit): Observable<any> {
     return this.httpClient.put(
-      `${this.url}/notes`,
+      `${this.url}/tasks`,
       data
     )
   }
 
-  public getNote(id: string | null): Observable<any> {
+  public getTask(id: string | null): Observable<any> {
     return this.httpClient.get(
-      `${this.url}/notes/${id}`,
+      `${this.url}/tasks/${id}`,
     )
   }
 
-  public listNote(): Observable<any> {
+  public listTasks(): Observable<any> {
     return this.httpClient.get(
-      `${this.url}/notes`,
+      `${this.url}/tasks`,
     )
   }
 }

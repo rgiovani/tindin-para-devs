@@ -1,11 +1,7 @@
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { AppComponent } from './app.component';
-import { NotesCreateEditComponent } from './pages/notes-create-edit/notes-create-edit.component';
-import { NotesListComponent } from './pages/notes-list/notes-list.component';
-import { LoginComponent } from './pages/login/login.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 const routes: Routes = [
   {
@@ -13,21 +9,9 @@ const routes: Routes = [
     component: TasksComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'auth',
+    component: AuthComponent
   },
-  // {
-  //   path: 'notes',
-  //   component: NotesListComponent
-  // },
-  // {
-  //   path: 'notes/create',
-  //   component: NotesCreateEditComponent
-  // },
-  // {
-  //   path: 'notes/edit/:id',
-  //   component: NotesCreateEditComponent
-  // },
 ];
 
 @NgModule({

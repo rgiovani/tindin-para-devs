@@ -1,4 +1,4 @@
-import { LoginService } from './../login.service';
+import { AuthService } from '../auth.service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class HttpInterceptorDefault implements HttpInterceptor {
   constructor(
-    private readonly loginService: LoginService
+    private readonly authService: AuthService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     req = req.clone({
       setHeaders: {
-        'token': this.loginService.getToken()
+        'token': this.authService.getToken()
       }
     })
     return next.handle(req)

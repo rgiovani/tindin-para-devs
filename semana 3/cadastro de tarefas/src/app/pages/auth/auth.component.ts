@@ -3,14 +3,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { LoginService } from '../../services/login/login.service';
+import { AuthService } from '../../services/login/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AuthComponent implements OnInit {
   form!: FormGroup
 
   visible: boolean = false
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly loginService: LoginService,
+    private readonly authService: AuthService,
     private readonly fb: FormBuilder,
     private readonly cd: ChangeDetectorRef,
     private readonly snackbar: MatSnackBar,
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
     if (!this.form.valid) {
       this.loading = false
 
-      const type = (this.login) ? 'login' : 'cadastro'
+      const type = (!!this.login) ? 'login' : 'cadastro'
       const message = `Preencha os campos para realizar o ${type}`
 
       return this.snackbar.open(message, '', {
@@ -76,24 +76,51 @@ export class LoginComponent implements OnInit {
       })
     }
 
+
     const data = this.form.getRawValue()
-    this.loginService.login({ email: data.email, password: data.password }).subscribe(
-      async (res: any) => {
-        sessionStorage.setItem('token', res.token)
-        return this.router.navigate(['/tasks'])
-      },
-      (err: any) => {
-        this.loading = false
-        return this.snackbar.open(
-          err?.error?.message ? err.error.message : 'Ooops... Confira seu e-mail e senha',
-          '',
-          { duration: 6000 }
-        )
-      }
-    )
+    if (this.login) {
+      this.authService.login({ email: data.email, password: data.password }).subscribe(
+        async (res: any) => {
+          sessionStorage.setItem('token', res.token)
+          return this.router.navigate(['/tasks'])
+        },
+        (err: any) => {
+          this.loading = false
+          return this.snackbar.open(
+            err?.error?.message ? err.error.message : 'Ooops... Confira seu e-mail e senha',
+            '',
+            { duration: 6000 }
+          )
+        }
+      )
+    } else {
+      this.authService.register({ name: data.name, email: data.email, password: data.password }).subscribe(
+        async (res: any) => {
+          this.login = true
+          this.send() //testar
+        },
+        (err: any) => {
+          this.loading = false
+          return this.snackbar.open(
+            err?.error?.message ? err.error.message : 'Ooops... Confira seu e-mail e senha',
+            '',
+            { duration: 6000 }
+          )
+        }
+      )
+    }
+  }
+
+  logout() {
+    this.login = false
+    this.register = false
+    this.isRecoveringPass = false
+    this.welcome = true
+    this.authService.logout()
   }
 
   setScreen(screen: string) {
+    this.form.reset()
     this.welcome = false
     if (screen === "login")
       this.login = true

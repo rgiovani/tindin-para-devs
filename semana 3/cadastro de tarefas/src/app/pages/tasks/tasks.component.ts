@@ -1,3 +1,5 @@
+import { AuthService } from '../../services/login/auth.service';
+import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+
+  isTaskFormVisible = false
+
   tasks = [
     {
       id: 0,
@@ -49,13 +54,127 @@ export class TasksComponent implements OnInit {
       },
       isChecked: false,
       isEditing: false,
-    }
+    },
+    {
+      id: 3,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 4,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 5,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 6,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 7,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 8,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 9,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
+    {
+      id: 10,
+      name: 'Criar um menu na esquerda',
+      isOpen: false,
+      cardCss: {
+        'height': '8px',
+        'align-items': 'center'
+      },
+      cardRadius: {
+        'borderRadius': '9999px'
+      },
+      isChecked: false,
+      isEditing: false,
+    },
   ]
 
   form: FormGroup
 
   constructor(
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly authService: AuthService,
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -111,8 +230,30 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  save(id: number) {
+  toggleTaskForm() {
+    this.isTaskFormVisible = !this.isTaskFormVisible
+    this.form.reset()
+  }
+
+  logout() {
+    this.isTaskFormVisible = false
+    this.authService.logout()
+    this.router.navigate(['/auth'])
+  }
+
+  create() {
+    console.log("Criando", this.form.value)
+    this.toggleTaskForm()
+    //TODO: Criar um botão que irá permitir adicionar uma nova tarefa.
+    //- O botao habilitará um novo card no topo da listagem.
+    //- O card tera um input para colocar o nome, um botao salvar e um botao cancelar.
+    //- Se clicar em cancelar o card some.
+    //- Se salvar, o card permanece no topo e é adicionado no array de tasks
+  }
+
+  update(id: number) {
     this.tasks[id].isEditing = false
+    this.form.reset()
     console.log("Salvando...")
   }
 

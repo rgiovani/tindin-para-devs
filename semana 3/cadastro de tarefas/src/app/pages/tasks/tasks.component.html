@@ -1,21 +1,58 @@
-<div class="w-full h-full bg-gray-200">
-  <div class="flex justify-center items-center text-lg">
-    <span class="mt-10">
-      All Tasks
-    </span>
+<div class="w-full bg-gray-200 pt-24 pb-36">
+
+
+  <!-- header -->
+  <nav class="fixed flex flex-row min-w-full top-0 shadow-md">
+    <div class="card bg-white max-w-xs min-w-full min-h-full pt-10 pb-5 flex flex-row">
+      <button type="button" (click)="logout()" class="ml-5 w-6 h-6">
+        <mat-icon class="text-pink-600">logout</mat-icon>
+      </button>
+
+      <div class="flex-1 ml-10 justify-center items-center text-lg">
+        <span class="text-pink-600">
+          Suas tarefas
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- new task -->
+  <div class="flex flex-col justify-center items-center" *ngIf="isTaskFormVisible">
+    <div class="mt-2 card overflow-hidden bg-white w-full max-w-xs round-border rounded shadow-md">
+      <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center">
+
+        <form [formGroup]="form" (submit)="create()">
+          <input type="text" placeholder="Nome da tarefa" formControlName="name">
+
+          <div class="flex flex-row items-center mt-5">
+            <button type="button" (click)="toggleTaskForm()"
+              class="ml-48 flex justify-center items-center h-8 w-8 bg-indigo-600 rounded-full shadow-md">
+              <mat-icon class="text-white text-base">arrow_back</mat-icon>
+            </button>
+
+            <button type="submit"
+              class="ml-6 flex justify-center items-center h-8 w-8 bg-green-400 rounded-full shadow-md">
+              <mat-icon class="text-white text-base">check</mat-icon>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="tasks.length > 0">
+  <!-- list -->
+  <div class="" *ngIf="tasks.length > 0">
     <div *ngFor="let task of tasks" class="flex flex-col justify-center items-center mt-2" fxLayout="column">
       <div class="mt-2 card overflow-hidden bg-white w-full max-w-xs round-border rounded-full shadow-md"
         [ngStyle]="task.cardRadius">
-
         <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center"
           [ngStyle]="task.cardCss">
           <div class="flex-1">
             <div class="flex flex-col">
               <span *ngIf="!task.isEditing" (click)="open(task.id)">{{task.name}}</span>
-              <form *ngIf="task.isEditing" [formGroup]="form" (submit)="save(task.id)">
+
+              <form *ngIf="task.isEditing" [formGroup]="form" (submit)="update(task.id)">
                 <input type="text" placeholder="Nome da tarefa" formControlName="name">
 
                 <div class="flex flex-row items-center mt-5">
@@ -73,4 +110,11 @@
     </div>
   </div>
 
+  <!-- add button -->
+  <nav *ngIf="!isTaskFormVisible" class="fixed inset-x-0 bottom-10 flex justify-center items-center">
+    <button (click)="toggleTaskForm()" class="h-48 w-48 bg-purple-600" mat-fab
+      aria-label="Botão para adicionar uma nova tarefa">
+      <mat-icon class="">add</mat-icon>
+    </button>
+  </nav>
 </div>

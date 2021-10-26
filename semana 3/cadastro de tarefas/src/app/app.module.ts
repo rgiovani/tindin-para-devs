@@ -18,17 +18,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 //import { MatSliderModule } from '@angular/material/slider';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { NotesListComponent } from './pages/notes-list/notes-list.component';
-import { NotesCreateEditComponent } from './pages/notes-create-edit/notes-create-edit.component';
+import { AuthComponent } from './pages/auth/auth.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotesListComponent,
-    NotesCreateEditComponent,
-    LoginComponent,
+    AuthComponent,
     TasksComponent
   ],
   imports: [

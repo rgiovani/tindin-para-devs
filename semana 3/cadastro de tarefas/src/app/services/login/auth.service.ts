@@ -9,7 +9,7 @@ import { Credential } from '../../model/Credential.model'
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
   private readonly url = environment.url
 
   constructor(
@@ -22,6 +22,21 @@ export class LoginService {
         email: credentials.email,
         password: credentials.password
       })
+  }
+
+  public register(credentials: Credential): Observable<any> {
+    return this.httpClient.post(`${this.url}/register`,
+      {
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password
+      })
+  }
+
+  public logout() {
+    if (sessionStorage.getItem('token'))
+      sessionStorage.removeItem('token')
+
   }
 
   public getToken(): string {
