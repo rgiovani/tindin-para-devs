@@ -15,6 +15,11 @@ export class LoginComponent implements OnInit {
   visible: boolean = false
   loading = false
   inputType = 'password'
+
+  welcome = true
+  login = false
+  register = false
+
   constructor(
     private readonly router: Router,
     private readonly loginService: LoginService,
@@ -25,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
+      name: ['', null],
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
@@ -37,7 +43,13 @@ export class LoginComponent implements OnInit {
 
     if (!this.form.valid) {
       this.loading = false
-      return this.snackbar.open('Preencha o e-mail e senha para realizar loin', '', {
+      const { name, email, password } = this.form.value
+      let fields = ''
+
+      const type = (this.login) ? 'login' : 'cadastro'
+      const message = `Preencha os campos para realizar o ${type}`
+
+      return this.snackbar.open(message, '', {
         duration: 6000,
         panelClass: ['orange-snackbar']
       })
@@ -58,6 +70,19 @@ export class LoginComponent implements OnInit {
         )
       }
     )
+  }
+
+  setScreen(screen: string) {
+    this.welcome = false
+    if (screen === "login")
+      this.login = true
+    else if (screen === "register")
+      this.register = true
+    else {
+      this.register = false
+      this.login = false
+      this.welcome = true
+    }
   }
 
   toggleVisibility() {

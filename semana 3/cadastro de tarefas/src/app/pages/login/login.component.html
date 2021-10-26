@@ -1,24 +1,28 @@
-<div class="w-full h-full image-bg" fxLayout="column" fxLayoutAlign="center center">
-  <div class="w-full h-full bg-pattern-local" fxLayout="column" fxLayoutAlign="center center">
-    <div class="card overflow-hidden bg-white w-full max-w-xs round-border">
+<div class="w-full h-full bg-gray-200">
 
-      <div class="p-6 pb-0 title-login" fxLayout="column" fxLayoutAlign="center center">
-        LOGIN
+
+  <div class="flex justify-center items-center w-full h-full bg-pattern-local">
+
+    <!-- login -->
+    <div *ngIf="login" class="card overflow-hidden bg-white w-full max-w-xs round-border rounded-3xl shadow-md">
+
+      <div class="pt-6 title-login flex justify-center" fxLayout="column">
+        <img width="80px" src="../../../assets/logo.png" alt="logo">
+
       </div>
 
-
       <div class="p-6" fxLayout="column" fxLayoutGap="16px">
-        <form autocomplete="nope" [formGroup]="form" fxFlex="auto" fxLayout="column">
 
-          <mat-form-field fxFlex="grow" appearance="fill">
+        <form class="" autocomplete="nope" [formGroup]="form" fxFlex="auto" fxLayout="column">
+          <mat-form-field class="mb-2 w-full" fxFlex="grow" appearance="fill">
             <mat-label>E-mail</mat-label>
             <input type="text" autocomplete="nope" formControlName="email" matInput required>
             <mat-error *ngIf="form?.get('email')?.hasError('required')">
-              Qual E-mail para fazer o login
+              Informe seu e-mail
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field fxFlex="grow" appearance="fill">
+          <mat-form-field class="w-full" fxFlex="grow" appearance="fill">
             <mat-label>Senha</mat-label>
             <input [type]="inputType" autocomplete="nope" formControlName="password" matInput required>
             <button (click)="toggleVisibility()" mat-icon-button matSuffix
@@ -27,30 +31,138 @@
               <mat-icon *ngIf="!visible">visibility_off</mat-icon>
             </button>
             <mat-error *ngIf="form?.get('password')?.hasError('required')">
-              Precisamos de uma senha para fazer o seu login
+              Informe sua senha
             </mat-error>
           </mat-form-field>
         </form>
-
-        <a [routerLink]="['/forgot-password']" class="caption forget">Esqueceu a senha?</a>
-
-        <button *ngIf="!loading" (click)="send()" class="rounded-full py-1 px-3 w-full orange-bg" color="primary"
-          mat-raised-button type="submit">
-          ENTRAR
-        </button>
-
-        <div fxLayoutAlign="center center">
-          <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
+        <div class="mb-6">
+          <a [routerLink]="['/forgot-password']" class="caption forget">Esqueceu a senha?</a>
         </div>
 
-        <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
-          <div class="fill-current text-center">
-            <img class="w-32" src="">
+        <div *ngIf="!loading">
+
+          <div class="pb-2">
+            <button (click)="send()" class="text-base rounded-full py-1 px-3 w-full bg-indigo-600 text-white"
+              mat-raised-button type="submit">
+              Entrar
+            </button>
           </div>
+          <div class="border-2 border-indigo-600 rounded-md">
+            <button (click)="setScreen('return')" class="w-full bg-white-600 text-indigo-600 rounded-md"
+              mat-raised-button type="submit">
+              Voltar
+            </button>
+          </div>
+
+        </div>
+
+        <div class="p-6 flex justify-center" fxLayoutAlign="center center">
+          <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
         </div>
 
       </div>
 
     </div>
+
+    <!-- register -->
+    <div *ngIf="register" class="card overflow-hidden bg-white w-full max-w-xs round-border rounded-3xl shadow-md">
+      <div class="pt-6 title-login flex justify-center" fxLayout="column" fxLayoutAlign="center center">
+        <img width="50px" src="../../../assets/logo.png" alt="logo">
+      </div>
+
+      <div class="text-indigo-600 text-base p-4 flex justify-center font-extrabold antialiased" fxLayout="column"
+        fxLayoutAlign="center center">
+        Vamos começar
+      </div>
+
+      <form class="p-4" autocomplete="nope" [formGroup]="form" fxFlex="auto" fxLayout="column">
+        <mat-form-field class="mb-2 w-full" fxFlex="grow" appearance="fill">
+          <mat-label>Informe o seu nome</mat-label>
+          <input type="text" autocomplete="nope" formControlName="name" matInput required>
+          <mat-error *ngIf="form?.get('name')?.hasError('required')">
+            Informe o seu nome
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="mb-2 w-full" fxFlex="grow" appearance="fill">
+          <mat-label>Informe o seu e-mail</mat-label>
+          <input type="text" autocomplete="nope" formControlName="email" matInput required>
+          <mat-error *ngIf="form?.get('email')?.hasError('required')">
+            Informe o seu e-mail
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full" fxFlex="grow" appearance="fill">
+          <mat-label>Digite uma senha</mat-label>
+          <input [type]="inputType" autocomplete="nope" formControlName="password" matInput required>
+          <button (click)="toggleVisibility()" mat-icon-button matSuffix
+            matToolTip="{{visible ? 'Esconder senha : 'Visualizar senha'}}" type="button">
+            <mat-icon *ngIf="visible">visibility</mat-icon>
+            <mat-icon *ngIf="!visible">visibility_off</mat-icon>
+          </button>
+          <mat-error *ngIf="form?.get('password')?.hasError('required')">
+            Digite uma senha
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <div class="p-6" fxLayout="column" fxLayoutGap="16px">
+
+        <div *ngIf="!loading">
+          <div class="pb-2">
+            <button (click)="send()" class="text-base rounded-full py-1 px-3 w-full bg-indigo-600 text-white"
+              mat-raised-button type="submit">
+              Entrar
+            </button>
+          </div>
+          <div class="border-2 border-indigo-600 rounded-md">
+            <button (click)="setScreen('return')" class="w-full bg-white-600 text-indigo-600 rounded-md"
+              mat-raised-button type="submit">
+              Voltar
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 flex justify-center" fxLayoutAlign="center center">
+        <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
+      </div>
+
+    </div>
+
+    <!-- welcome -->
+    <div *ngIf="welcome" class="card overflow-hidden bg-white w-full max-w-xs round-border rounded-3xl shadow-md">
+      <div class="p-4 flex justify-center" fxLayout="column" fxLayoutAlign="center center">
+        <img width="100px" src="../../../assets/logo.png" alt="logo">
+      </div>
+      <div class="text-gray-800 text-base p-2 flex justify-center font-extrabold antialiased" fxLayout="column"
+        fxLayoutAlign="center center">
+        Bem vindo ao Task App
+      </div>
+      <div class="text-gray-500 pb-6 flex justify-center font-thin antialiased" fxLayout="column"
+        fxLayoutAlign="center center">
+        Hora de lembrar das suas tarefas
+      </div>
+
+      <div class="p-6" fxLayout="column" fxLayoutGap="16px">
+        <div class="pb-2">
+
+          <button *ngIf="!loading" (click)="setScreen('login')"
+            class="text-base py-1 px-3 w-full bg-indigo-600 text-white pb-10" mat-raised-button type="submit">
+            Entrar
+          </button>
+
+        </div>
+
+        <div class="border-2 border-indigo-600 rounded-md">
+          <button *ngIf="!loading" (click)="setScreen('register')"
+            class="w-full bg-white-600 text-indigo-600 rounded-md" mat-raised-button type="submit">
+            Inscrever-se
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
