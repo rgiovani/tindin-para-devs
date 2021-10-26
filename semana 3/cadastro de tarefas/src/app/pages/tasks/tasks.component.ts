@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit {
     private readonly fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      description: ['', Validators.required],
+      name: ['', Validators.required],
     })
   }
 
@@ -33,7 +33,7 @@ export class TasksComponent implements OnInit {
     if (this.isEditing) {
       // this.taskService.getTask(this.id).subscribe((res) => {
       this.form = this.fb.group({
-        description: ['', Validators.required]
+        name: ['', Validators.required]
       })
       //})
     }

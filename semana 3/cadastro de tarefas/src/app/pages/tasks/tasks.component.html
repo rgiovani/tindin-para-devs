@@ -14,7 +14,7 @@
           <div class="flex flex-col">
             <span *ngIf="!isEditing" (click)="open(0)"> first task</span>
             <form *ngIf="isEditing" [formGroup]="form" (submit)="save()">
-              <input type="text" placeholder="Descrição" formControlName="description">
+              <input type="text" placeholder="Nome da tarefa" formControlName="name">
 
               <div class="flex flex-row items-center mt-5">
                 <button (submit)="taskAction('cancel')" *ngIf="isEditing"

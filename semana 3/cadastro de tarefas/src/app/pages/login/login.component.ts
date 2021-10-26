@@ -12,13 +12,24 @@ import { LoginService } from '../../services/login/login.service';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup
-  visible: boolean = false
-  loading = false
-  inputType = 'password'
 
-  welcome = true
-  login = false
-  register = false
+  visible: boolean = false
+  isRecoveringPass: boolean = false
+  loading: boolean = false
+
+  welcome: boolean = true
+  login: boolean = false
+  register: boolean = false
+
+  inputType: string = 'password'
+
+  UIText = {
+    title: 'Vamos começar',
+    name: 'Informe o seu nome',
+    email: 'Informe o seu e-mail',
+    password: 'Digite uma senha',
+    btnSubmit: 'Entrar'
+  }
 
   constructor(
     private readonly router: Router,
@@ -34,6 +45,18 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
+
+    this.reloadUiText()
+  }
+
+  reloadUiText() {
+    this.UIText = {
+      title: (!this.isRecoveringPass) ? 'Vamos começar' : 'Vamos redefinir a sua senha',
+      name: 'Informe o seu nome',
+      email: (!this.isRecoveringPass) ? 'Informe o seu e-mail' : 'Informe o e-mail cadastrado',
+      password: (!this.isRecoveringPass) ? 'Digite uma senha' : 'Digite uma nova senha',
+      btnSubmit: (!this.isRecoveringPass) ? 'Entrar' : 'Confirmar'
+    }
   }
 
   send(): any {
@@ -43,8 +66,6 @@ export class LoginComponent implements OnInit {
 
     if (!this.form.valid) {
       this.loading = false
-      const { name, email, password } = this.form.value
-      let fields = ''
 
       const type = (this.login) ? 'login' : 'cadastro'
       const message = `Preencha os campos para realizar o ${type}`
@@ -76,12 +97,23 @@ export class LoginComponent implements OnInit {
     this.welcome = false
     if (screen === "login")
       this.login = true
-    else if (screen === "register")
-      this.register = true
     else {
-      this.register = false
-      this.login = false
-      this.welcome = true
+      this.reloadUiText()
+      if (screen === "register") {
+        this.register = true
+        this.isRecoveringPass = false
+      } else if (screen === "return") {
+        if (this.isRecoveringPass) {
+          this.login = true
+          this.welcome = false
+        } else {
+          this.login = false
+          this.welcome = true
+        }
+
+        this.isRecoveringPass = false
+        this.register = false
+      }
     }
   }
 
@@ -95,6 +127,13 @@ export class LoginComponent implements OnInit {
     }
 
     this.cd.markForCheck()
+  }
+
+  toggleForgotPasswordScreen() {
+    this.isRecoveringPass = true
+    this.register = true
+
+    this.reloadUiText()
   }
 
 }
