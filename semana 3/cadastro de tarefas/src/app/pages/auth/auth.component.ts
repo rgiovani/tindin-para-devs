@@ -97,7 +97,9 @@ export class AuthComponent implements OnInit {
       this.authService.register({ name: data.name, email: data.email, password: data.password }).subscribe(
         async (res: any) => {
           this.login = true
-          this.send() //testar
+          this.register = false
+          this.loading = false
+          this.send()
         },
         (err: any) => {
           this.loading = false
