@@ -29,7 +29,7 @@ export class TasksComponent implements OnInit {
     },
     {
       id: 1,
-      name: 'Integrar a api com o front',
+      name: 'Integrar o front com o back',
       isOpen: false,
       cardCss: {
         'height': '8px',
@@ -43,119 +43,7 @@ export class TasksComponent implements OnInit {
     },
     {
       id: 2,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 3,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 4,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 5,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 6,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 7,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 8,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 9,
-      name: 'Criar um menu na esquerda',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 10,
-      name: 'Criar um menu na esquerda',
+      name: 'Finalizar a atividade',
       isOpen: false,
       cardCss: {
         'height': '8px',
