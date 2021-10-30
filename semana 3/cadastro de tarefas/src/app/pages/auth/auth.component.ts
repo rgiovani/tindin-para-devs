@@ -48,12 +48,12 @@ export class AuthComponent implements OnInit {
 
     this.reloadUiText()
   }
-  ngAfterViewInit() {
 
-    this.authService.isTokenValid().subscribe(
+  ngAfterViewInit() {
+    this.authService.isTokenValid()?.subscribe(
       async (res: any) => {
         this.router.navigate(['/tasks'])
-      }, (err) => {
+      }, (err: any) => {
         this.welcome = true
         this.login = false
         this.register = false
@@ -75,7 +75,6 @@ export class AuthComponent implements OnInit {
 
   send(): any {
     if (this.loading) { return }
-
     this.loading = true
 
     if (!this.form.valid) {
@@ -93,27 +92,31 @@ export class AuthComponent implements OnInit {
     const data = this.form.getRawValue()
 
     if (this.login) {
-      this.authService.login({ email: data.email, password: data.password }).subscribe(
-        async (res: any) => {
-          sessionStorage.setItem('token', res.token)
-          return this.router.navigate(['/tasks'])
-        },
-        (err: any) => {
-          this.loading = false
-          return this.snackbar.open(
-            err?.error?.message ? err.error.message : 'Ooops... Confira seu e-mail e senha',
-            '',
-            { duration: 6000 }
-          )
-        }
-      )
+      this.handleServices(this.authService.login.bind(this.authService), data, async (res: any) => {
+        sessionStorage.setItem('token', res.token)
+        this.form.reset()
+        return this.router.navigate(['/tasks'])
+      })
+    } else if (this.isRecoveringPass) {
+      this.handleServices(this.authService.recover.bind(this.authService), data)
     } else {
-      this.authService.register({ name: data.name, email: data.email, password: data.password }).subscribe(
-        async (res: any) => {
-          this.login = true
-          this.register = false
-          this.loading = false
-        },
+      this.handleServices(this.authService.register.bind(this.authService), data)
+    }
+  }
+
+  handleServices(fn: any, data: any, customNext?: any) {
+    const next = (customNext) ? customNext : async (res: any) => {
+      this.setScreen("login")
+      this.form.setValue({
+        name: data.name,
+        email: data.email,
+        password: data.password
+      })
+    }
+
+    fn({ email: data.email, password: data.password, name: data.name, })
+      .subscribe(
+        next,
         (err: any) => {
           this.loading = false
           return this.snackbar.open(
@@ -123,7 +126,6 @@ export class AuthComponent implements OnInit {
           )
         }
       )
-    }
   }
 
   logout() {
@@ -135,24 +137,21 @@ export class AuthComponent implements OnInit {
   }
 
   setScreen(screen: string) {
-    this.form.reset()
     this.welcome = false
-    if (screen === "login")
+    if (screen === "login") {
       this.login = true
-    else {
+      this.register = false
+      this.loading = false
+      this.isRecoveringPass = false
+    } else {
       this.reloadUiText()
       if (screen === "register") {
         this.register = true
         this.isRecoveringPass = false
       } else if (screen === "return") {
-        if (this.isRecoveringPass) {
-          this.login = true
-          this.welcome = false
-        } else {
-          this.login = false
-          this.welcome = true
-        }
-
+        this.form.reset()
+        this.login = (this.isRecoveringPass) ? true : false
+        this.welcome = (this.isRecoveringPass) ? false : true
         this.isRecoveringPass = false
         this.register = false
       }
@@ -173,6 +172,7 @@ export class AuthComponent implements OnInit {
 
   toggleForgotPasswordScreen() {
     this.isRecoveringPass = true
+    this.login = false
     this.register = true
 
     this.reloadUiText()

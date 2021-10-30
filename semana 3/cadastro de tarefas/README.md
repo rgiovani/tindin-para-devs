@@ -66,7 +66,7 @@ http://localhost:4200/
 
 - [x] O frontend deve permitir que o usuario ja logado na aplicação deslogue da aplicação.
 
-- [] O frontend deve possibilitar que o usuario recupere a sua conta.
+- [x] O frontend deve possibilitar que o usuario recupere a sua conta.
 
 - [x] O frontend deve validar se o usuario ja esta logado na aplicação e redirecionar o usuario para a pagina correta em caso de refresh.
 

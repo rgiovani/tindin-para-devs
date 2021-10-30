@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Credential } from '../../model/Credential.model'
@@ -13,11 +13,18 @@ export class AuthService {
   private readonly url = environment.url
 
   constructor(
-    private readonly httpClient: HttpClient
-  ) { }
+    private httpClient: HttpClient
+  ) {
+  }
 
-  public isTokenValid(): Observable<any> {
-    return this.httpClient.get(`${this.url}/auth/validate`)
+  public sendHome(): Observable<any> {
+    return this.httpClient.get(`${this.url}/auth`)
+  }
+
+  public isTokenValid(): any {
+    if (sessionStorage.getItem('token')) {
+      return this.httpClient.get(`${this.url}/auth/validate`)
+    }
   }
 
   public login(credentials: Credential): Observable<any> {
@@ -29,7 +36,16 @@ export class AuthService {
   }
 
   public register(credentials: Credential): Observable<any> {
-    return this.httpClient.post(`${this.url}/register`,
+    return this.httpClient?.post(`${this.url}/register`,
+      {
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password
+      })
+  }
+
+  public recover(credentials: Credential): Observable<any> {
+    return this.httpClient?.post(`${this.url}/recover`,
       {
         name: credentials.name,
         email: credentials.email,
@@ -46,4 +62,5 @@ export class AuthService {
   public getToken(): string {
     return sessionStorage.getItem('token') ?? ''
   }
+
 }

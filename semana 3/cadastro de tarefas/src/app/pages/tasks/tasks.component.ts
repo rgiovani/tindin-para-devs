@@ -34,7 +34,7 @@ export class TasksComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required]
     })
-
+    this.loading = true
     this.initTasksStorage()
   }
 
@@ -76,14 +76,19 @@ export class TasksComponent implements OnInit {
             id: task._id,
             name: task.name,
             isChecked: this.tasks[index].isChecked
-          }).subscribe()
+          }).subscribe(res => {
+            this.loading = false
+          })
         }
       });
 
       if (!this.isLocal) {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        this.loading = false
       }
     }
+
+    this.loading = false
   }
 
   setDone(isDone: boolean, id: string) {
