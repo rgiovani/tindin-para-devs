@@ -5,15 +5,13 @@
 npm start 
  ```
 
-- A API utiliza uma função middleware ***(isLogged)*** que compara o valor da chave **token** passado no **headers** em cada requisição. Dessa forma, é possivel controlar se o usuário tem ou não permissão para acessar as rotas da API.
+<br>
 
----
+- A API utiliza uma função middleware chamada ***(isLogged)***, essa função verifica o valor da chave **token** passado no **headers** em cada requisição. Dessa forma, é possivel controlar se o usuário tem ou não permissão para acessar as rotas da API.
 
 ## **Rotas**:
 
 - ### **Usuário:**
-
-  <br>
 
   - **registrar** -> *(POST)*
     - route: **/register** 
@@ -44,18 +42,14 @@ npm start
 
 - ### **Tarefas:**
 
-  <br>
-
-  Caso você utilize uma plataforma de consumo de APIs (ex: postman, insomnia etc...), **lembre-se de enviar o token no headers.**
+  Caso você utilize um software de consumo de APIs (ex: postman, insomnia etc...), **lembre-se de enviar o token no headers.**
   O valor da chave token é gerado quando o usuário se loga na aplicação. **(/login)**
-
-  <br>
 
   - **criar** -> *(POST)*
     - route: **/tasks** 
     - *Body(JSON)*
     ```
-      { "name": Terminar atividade"}
+      { "name": "Terminar atividade"}
     ``` 
 
     <br>
@@ -82,7 +76,7 @@ npm start
    
   <br>
  
-  - **listar** -> *(GET)* 
+  - **listar todos** -> *(GET)* 
     - route: **/tasks** 
     - *Body(JSON)*
 
