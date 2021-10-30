@@ -93,3 +93,30 @@ npm start
     - *Body(JSON)*
     
   <br>
+
+---
+
+#### **Os requisitos:**
+- [x] O backend deve validar o token do usuario.
+
+- [x] O backend deve permitir a criação de uma nova conta.
+
+- [x] O backend deve salvar a conta do usuario com a senha criptografada.
+
+- [x] O backend deve permitir a realização de login em uma conta existente.
+
+- [x] O backend deve validar a senha digitada com a senha criptografada ao realizar login.
+
+- [x] O backend deve permitir a recuperação de uma conta existente.
+
+- [x] O backend deve permitir a listagem de tarefas cadastradas.
+
+- [x] O backend deve permitir a criação de uma nova tarefa.
+
+- [x] O backend deve permitir a edição de uma tarefa cadastrada.
+
+- [x] O backend deve permitir a remoção de uma tarefa cadastrada.
+
+- [x] O backend deve salvar em um log as ações dos usuarios na plataforma.
+
+---
