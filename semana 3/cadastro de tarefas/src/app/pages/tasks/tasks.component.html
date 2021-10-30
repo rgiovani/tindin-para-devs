@@ -50,13 +50,13 @@
           [ngStyle]="task.cardCss">
           <div class="flex-1">
             <div class="flex flex-col">
-              <span *ngIf="!task.isEditing" (click)="open(task.id)">{{task.name}}</span>
+              <span *ngIf="!task.isEditing" (click)="open(task._id)">{{task.name}}</span>
 
-              <form *ngIf="task.isEditing" [formGroup]="form" (submit)="update(task.id)">
-                <input type="text" placeholder="Nome da tarefa" formControlName="name">
+              <form *ngIf="task.isEditing" [formGroup]="form" (submit)="update(task._id)">
+                <input type="text" formControlName="name">
 
                 <div class="flex flex-row items-center mt-5">
-                  <button (submit)="taskAction('cancel', task.id)" *ngIf="task.isEditing"
+                  <button (submit)="taskAction('cancel', task._id)" *ngIf="task.isEditing"
                     class="ml-48 flex justify-center items-center h-8 w-8 bg-indigo-600 rounded-full shadow-md">
 
                     <mat-icon class="text-white text-base">arrow_back</mat-icon>
@@ -77,14 +77,14 @@
 
                   <button *ngIf="!task.isEditing"
                     class="flex justify-center items-center h-6 w-6 bg-red-600 rounded-full shadow-md">
-                    <div (click)="remove(task.id)">
+                    <div (click)="remove(task._id)">
                       <mat-icon class="text-white text-base">delete</mat-icon>
                     </div>
                   </button>
 
                   <button *ngIf="!task.isEditing"
                     class="ml-24 flex justify-center items-center h-8 w-8 bg-blue-400 rounded-full shadow-md">
-                    <div (click)="taskAction('edit', task.id)">
+                    <div (click)="taskAction('edit', task._id)">
                       <mat-icon class="text-white text-base">edit</mat-icon>
                     </div>
                   </button>
@@ -94,12 +94,12 @@
           </div>
 
           <div *ngIf="!task.isEditing">
-            <button *ngIf="!task.isChecked" (click)="setDone(true, task.id)"
+            <button *ngIf="!task.isChecked" (click)="setDone(true, task._id)"
               class="flex justify-center items-center h-6 w-6 bg-white-600 rounded-full shadow-md border-2 border-grey-900">
               <mat-icon class=" text-white text-base">check</mat-icon>
             </button>
 
-            <button *ngIf="task.isChecked" (click)="setDone(false, task.id)"
+            <button *ngIf="task.isChecked" (click)="setDone(false, task._id)"
               class="flex justify-center items-center h-6 w-6 bg-green-400 rounded-full shadow-md">
               <mat-icon class="text-white text-base">check</mat-icon>
             </button>

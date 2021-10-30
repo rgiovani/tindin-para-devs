@@ -45,13 +45,12 @@ const update = async (req: Request<any>, res: Response<any>) => {
     const { _id: userId } = req.user
 
     const id = req.body.id
-    const name = req.body.name
 
     if (!id) {
       return res.status(400).json({ message: 'Informe o campo id!' })
     }
 
-    const taskUpdated = await task.update({ id, name }, userId)
+    const taskUpdated = await task.update(req.body, userId)
     return res.json(taskUpdated)
   } catch (err: any) {
     return error(res, err)

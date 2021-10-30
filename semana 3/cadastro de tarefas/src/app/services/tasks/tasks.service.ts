@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { iTasksCreate, iTasksDelete, iTasksEdit } from '../../model/tasks.model';
+import { iTasksCreate, iTasksEdit } from '../../model/tasks.model';
 
 @Injectable({
   providedIn: 'root'

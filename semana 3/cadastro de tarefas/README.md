@@ -74,7 +74,7 @@ http://localhost:4200/
 
 - [] O frontend deve permitir a criação de uma nova tarefa.
 
-- [] O frontend deve permitir a edição de uma tarefa cadastrada.
+- [x] O frontend deve permitir a edição de uma tarefa cadastrada.
 
 - [] O frontend deve permitir a remoção de uma tarefa cadastrada.
 

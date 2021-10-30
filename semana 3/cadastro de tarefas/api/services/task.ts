@@ -52,7 +52,8 @@ const create = async (task: ITask, userId?: string) => {
   return true
 }
 
-const update = async (task: ITask, userId?: string) => {
+const update = async (task: any, userId?: string) => {
+
   if (!task.id) {
     throw new Error("Informe o campo id!")
   }
@@ -61,11 +62,13 @@ const update = async (task: ITask, userId?: string) => {
     throw new Error("Informe o campo name!")
   }
 
-  task.isChecked = (task.isChecked) ? task.isChecked : false
-
   await connect()
 
-  const taskFounded = await Task.findByIdAndUpdate(task.id, task)
+  const query = { _id: task.id }
+  const update = { "name": task.name, "isChecked": task.isChecked }
+  const option = { new: true }
+
+  const taskFounded = await Task.findOneAndUpdate(query, update, option)
 
   if (!taskFounded) {
     throw new Error("Nenhuma tarefa encontrada com o id informado!")

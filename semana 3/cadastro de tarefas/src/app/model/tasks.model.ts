@@ -4,7 +4,8 @@ export interface iTasksCreate {
 
 export interface iTasksEdit {
   id: string,
-  name: string
+  name: string,
+  isChecked?: boolean
 }
 
 export interface iTasksInfo {
