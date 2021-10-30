@@ -113,6 +113,20 @@
     </div>
   </div>
 
+  <div class="" *ngIf="!isTaskFormVisible">
+    <div class="" *ngIf="tasks.length == 0">
+      <div class="flex flex-col justify-center items-center mt-14 animate-fade opacity-70">
+        <div>
+          <img width="100%" src="../../../assets/nothing-found.png" alt="">
+        </div>
+        <div class="mt-8">
+          <span class="text-lg text-indigo-500">Nenhuma tarefa encontrada</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- add button -->
   <nav *ngIf="!isTaskFormVisible" class="fixed inset-x-0 bottom-10 flex justify-center items-center">
     <button (click)="toggleTaskForm()" class="h-48 w-48 bg-purple-600" mat-fab

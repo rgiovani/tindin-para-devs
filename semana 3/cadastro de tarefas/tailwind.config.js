@@ -12,9 +12,19 @@ module.exports = {
   //     './src/**/*.{html,ts}',
   //   ]
   // },
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        fade: 'fadeOut 2s ease-in-out',
+      },
+      keyframes: theme => ({
+        fadeOut: {
+          '0%': { opacity: 0 },
+          '60%': { opacity: 0.7 },
+        },
+      }),
+    },
   },
   variants: {
     extend: {},
