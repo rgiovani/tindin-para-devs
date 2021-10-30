@@ -11,7 +11,7 @@ import { AuthService } from '../../services/login/auth.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-
+  loading = false
   isTaskFormVisible = false
   tasks: any[] = []
   form: FormGroup
@@ -136,18 +136,21 @@ export class TasksComponent implements OnInit {
 
   toggleTaskForm() {
     this.isTaskFormVisible = !this.isTaskFormVisible
+    window.scrollTo(0, 0);
     this.form.reset()
   }
 
   logout() {
     this.isTaskFormVisible = false
-
+    this.loading = true
     this.tasks.forEach((task: any, index: number) => {
       this.taskService.editTask({
         id: task._id,
         name: task.name,
         isChecked: this.tasks[index].isChecked
-      }).subscribe()
+      }).subscribe(res => {
+        this.loading = false
+      })
 
     })
 
@@ -159,6 +162,8 @@ export class TasksComponent implements OnInit {
   create() {
     if (this.form.value) {
       const { name } = this.form.value
+      this.loading = true
+
       this.taskService.createTask({ name: name }).subscribe(res => {
         const task = {
           _id: res.taskId,
@@ -180,12 +185,15 @@ export class TasksComponent implements OnInit {
         this.toggleTaskForm()
         this.loadCard()
         this.form.reset()
+
+        this.loading = false
       })
     }
   }
 
   update(id: string) {
     const { name } = this.form.getRawValue()
+    this.loading = true
     this.taskService.editTask({ id: id, name: name }).subscribe(res => {
       this.tasks.find((item, index) => {
         if (item._id === id) {
@@ -196,13 +204,14 @@ export class TasksComponent implements OnInit {
       })
       this.loadCard()
       this.form.reset()
-
+      this.loading = false
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
     })
   }
 
   remove(id: string) {
     let taskPosition: number
+    this.loading = true
     this.taskService.removeTask(id).subscribe(res => {
       this.tasks.find((item, index) => {
         taskPosition = (item._id === id) ? index : taskPosition
@@ -212,6 +221,7 @@ export class TasksComponent implements OnInit {
       this.loadCard()
       this.form.reset()
 
+      this.loading = false
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
     })
   }

@@ -4,134 +4,148 @@
   <!-- header -->
   <nav class="fixed flex flex-row min-w-full top-0 shadow-md">
     <div class="card bg-white max-w-xs min-w-full min-h-full pt-10 pb-5 flex flex-row">
-      <button type="button" (click)="logout()" class="ml-5 w-6 h-6">
-        <mat-icon class="text-pink-600">logout</mat-icon>
+      <button type="button" (click)="logout()" class="ml-5 w-6 h-6 transform rotate-180">
+        <mat-icon class="text-indigo-600">logout</mat-icon>
       </button>
 
       <div class="flex-1 ml-10 justify-center items-center text-lg">
-        <span class="text-pink-600">
+        <span class="text-indigo-600">
           Suas tarefas
         </span>
       </div>
     </div>
   </nav>
 
-  <!-- new task -->
-  <div class="flex flex-col justify-center items-center" *ngIf="isTaskFormVisible">
-    <div class="mt-2 card overflow-hidden bg-white w-full max-w-xs round-border rounded shadow-md">
-      <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center">
 
-        <form [formGroup]="form" (submit)="create()">
-          <input class="break-words w-64 h-10" type="text" placeholder="Nome da tarefa" formControlName="name"
-            minlength="3" maxlength="25" required>
-
-          <div class="flex flex-row items-center mt-5">
-            <button type="button" (click)="toggleTaskForm()"
-              class="ml-48 flex justify-center items-center h-8 w-8 bg-indigo-600 rounded-full shadow-md">
-              <mat-icon class="text-white text-base">arrow_back</mat-icon>
-            </button>
-
-            <button type="submit"
-              class="ml-6 flex justify-center items-center h-8 w-8 bg-green-400 rounded-full shadow-md">
-              <mat-icon class="text-white text-base">check</mat-icon>
-            </button>
-          </div>
-        </form>
-
-      </div>
+  <!-- loading -->
+  <div *ngIf="loading" class="flex justify-center items-center w-full h-full">
+    <div class="" fxLayoutAlign="center center">
+      <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
     </div>
   </div>
 
-  <!-- list -->
-  <div class="" *ngIf="tasks.length > 0">
-    <div *ngFor="let task of tasks" class="flex flex-col justify-center items-center mt-2" fxLayout="column">
-      <div class="mt-2 card overflow-hidden bg-white w-full h-auto max-w-xs round-border rounded-full shadow-md"
-        [ngStyle]="task.cardRadius">
-        <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center"
-          [ngStyle]="task.cardCss">
-          <div class="flex-1">
-            <div class="flex flex-col">
-              <span class="break-all text-sm pl-2 pr-2" *ngIf="!task.isEditing"
-                (click)="open(task._id)">{{task.name}}</span>
+  <div *ngIf="!loading">
 
-              <form *ngIf="task.isEditing" [formGroup]="form" (submit)="update(task._id)">
-                <input class="break-words w-64 h-10" type="text" formControlName="name" minlength="3" maxlength="25"
-                  required>
+    <!-- new task -->
+    <div class="flex flex-col justify-center items-center  animate-normalFade" *ngIf="isTaskFormVisible">
+      <div class="mt-2 card overflow-hidden bg-white w-full max-w-xs round-border rounded shadow-md">
+        <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center">
 
-                <div class="flex flex-row items-center mt-3">
-                  <button (submit)="taskAction('cancel', task._id)" *ngIf="task.isEditing"
-                    class="ml-48 flex justify-center items-center h-8 w-8 bg-indigo-600 rounded-full shadow-md">
+          <form [formGroup]="form" (submit)="create()">
+            <input class="break-words w-64 h-10" type="text" placeholder="Nome da tarefa" formControlName="name"
+              minlength="3" maxlength="25" required>
 
-                    <mat-icon class="text-white text-base">arrow_back</mat-icon>
+            <div class="flex flex-row items-center mt-5">
+              <button type="button" (click)="toggleTaskForm()"
+                class="ml-48 flex justify-center items-center h-8 w-8 bg-indigo-600 rounded-full shadow-md">
+                <mat-icon class="text-white text-base">arrow_back</mat-icon>
+              </button>
 
-                  </button>
+              <button type="submit"
+                class="ml-6 flex justify-center items-center h-8 w-8 bg-green-400 rounded-full shadow-md">
+                <mat-icon class="text-white text-base">check</mat-icon>
+              </button>
+            </div>
+          </form>
 
-                  <button type="submit" *ngIf="task.isEditing"
-                    class="ml-5 flex justify-center items-center h-8 w-8 bg-green-400 rounded-full shadow-md">
+        </div>
+      </div>
+    </div>
 
-                    <mat-icon class="text-white text-base">check</mat-icon>
+    <!-- list -->
+    <div class="pb-32" *ngIf="tasks.length > 0">
+      <div *ngFor="let task of tasks" class="flex flex-col justify-center items-center mt-2" fxLayout="column">
+        <div
+          class="mt-2 card overflow-hidden bg-white w-full h-auto max-w-xs round-border rounded-full shadow-md animate-normalFade"
+          [ngStyle]="task.cardRadius">
+          <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center"
+            [ngStyle]="task.cardCss">
+            <div class="flex-1">
+              <div class="flex flex-col">
+                <span class="break-all text-sm pl-2 pr-2" *ngIf="!task.isEditing"
+                  (click)="open(task._id)">{{task.name}}</span>
 
-                  </button>
-                </div>
-              </form>
+                <form *ngIf="task.isEditing" [formGroup]="form" (submit)="update(task._id)">
+                  <input class="break-words w-64 h-10" type="text" formControlName="name" minlength="3" maxlength="25"
+                    required>
 
-              <div *ngIf="task.isOpen" class="mt-4">
-                <div class="flex flex-row items-center">
+                  <div class="flex flex-row items-center mt-3">
+                    <button (click)="taskAction('cancel', task._id)" *ngIf="task.isEditing"
+                      class="ml-48 flex justify-center items-center h-8 w-8 bg-indigo-600 rounded-full shadow-md">
 
-                  <button *ngIf="!task.isEditing"
-                    class="flex justify-center items-center h-6 w-6 bg-red-600 rounded-full shadow-md">
-                    <div (click)="remove(task._id)">
-                      <mat-icon class="text-white text-base">delete</mat-icon>
-                    </div>
-                  </button>
+                      <mat-icon class="text-white text-base">arrow_back</mat-icon>
 
-                  <button *ngIf="!task.isEditing"
-                    class="ml-24 flex justify-center items-center h-8 w-8 bg-blue-400 rounded-full shadow-md">
-                    <div (click)="taskAction('edit', task._id)">
-                      <mat-icon class="text-white text-base">edit</mat-icon>
-                    </div>
-                  </button>
+                    </button>
+
+                    <button type="submit" *ngIf="task.isEditing"
+                      class="ml-5 flex justify-center items-center h-8 w-8 bg-green-400 rounded-full shadow-md">
+
+                      <mat-icon class="text-white text-base">check</mat-icon>
+
+                    </button>
+                  </div>
+                </form>
+
+                <div *ngIf="task.isOpen" class="mt-4">
+                  <div class="flex flex-row items-center">
+
+                    <button *ngIf="!task.isEditing"
+                      class="flex justify-center items-center h-6 w-6 bg-red-600 rounded-full shadow-md">
+                      <div (click)="remove(task._id)">
+                        <mat-icon class="text-white text-base">delete</mat-icon>
+                      </div>
+                    </button>
+
+                    <button *ngIf="!task.isEditing"
+                      class="ml-24 flex justify-center items-center h-8 w-8 bg-blue-400 rounded-full shadow-md">
+                      <div (click)="taskAction('edit', task._id)">
+                        <mat-icon class="text-white text-base">edit</mat-icon>
+                      </div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div *ngIf="!task.isEditing">
+              <button *ngIf="!task.isChecked" (click)="setDone(true, task._id)"
+                class="flex justify-center items-center h-6 w-6 bg-white-600 rounded-full shadow-md border-2 border-grey-900">
+                <mat-icon class=" text-white text-base">check</mat-icon>
+              </button>
+
+              <button *ngIf="task.isChecked" (click)="setDone(false, task._id)"
+                class="flex justify-center items-center h-6 w-6 bg-green-400 rounded-full shadow-md">
+                <mat-icon class="text-white text-base">check</mat-icon>
+              </button>
+            </div>
           </div>
 
-          <div *ngIf="!task.isEditing">
-            <button *ngIf="!task.isChecked" (click)="setDone(true, task._id)"
-              class="flex justify-center items-center h-6 w-6 bg-white-600 rounded-full shadow-md border-2 border-grey-900">
-              <mat-icon class=" text-white text-base">check</mat-icon>
-            </button>
+        </div>
+      </div>
+    </div>
 
-            <button *ngIf="task.isChecked" (click)="setDone(false, task._id)"
-              class="flex justify-center items-center h-6 w-6 bg-green-400 rounded-full shadow-md">
-              <mat-icon class="text-white text-base">check</mat-icon>
-            </button>
+    <div class="" *ngIf="!isTaskFormVisible">
+      <div class="" *ngIf="tasks.length == 0">
+        <div class="flex flex-col justify-center items-center mt-14 animate-fade opacity-70">
+          <div>
+            <img width="100%" src="../../../assets/nothing-found.png" alt="">
           </div>
-        </div>
+          <div class="mt-8">
+            <span class="text-lg text-indigo-500">Nenhuma tarefa encontrada</span>
+          </div>
 
+        </div>
       </div>
     </div>
+
+    <!-- add button -->
+    <nav *ngIf="!isTaskFormVisible"
+      class="fixed inset-x-0 bottom-10 flex justify-center items-center animate-normalFade">
+      <button (click)="toggleTaskForm()" class="h-48 w-48 bg-indigo-500 text-white" color="" mat-fab
+        aria-label="Botão para adicionar uma nova tarefa">
+        <mat-icon class="">add</mat-icon>
+      </button>
+    </nav>
+
   </div>
-
-  <div class="" *ngIf="!isTaskFormVisible">
-    <div class="" *ngIf="tasks.length == 0">
-      <div class="flex flex-col justify-center items-center mt-14 animate-fade opacity-70">
-        <div>
-          <img width="100%" src="../../../assets/nothing-found.png" alt="">
-        </div>
-        <div class="mt-8">
-          <span class="text-lg text-indigo-500">Nenhuma tarefa encontrada</span>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- add button -->
-  <nav *ngIf="!isTaskFormVisible" class="fixed inset-x-0 bottom-10 flex justify-center items-center">
-    <button (click)="toggleTaskForm()" class="h-48 w-48 bg-purple-600" mat-fab
-      aria-label="Botão para adicionar uma nova tarefa">
-      <mat-icon class="">add</mat-icon>
-    </button>
-  </nav>
 </div>

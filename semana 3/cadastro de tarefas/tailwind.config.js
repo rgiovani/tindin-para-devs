@@ -16,12 +16,17 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        fade: 'fadeOut 2s ease-in-out',
+        fade: 'fadeOutNothingFound 2s ease-in-out',
+        normalFade: 'normalFade 1s ease-in-out'
       },
       keyframes: theme => ({
-        fadeOut: {
+        fadeOutNothingFound: {
           '0%': { opacity: 0 },
           '60%': { opacity: 0.7 },
+        },
+        normalFade: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
         },
       }),
     },
