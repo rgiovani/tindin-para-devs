@@ -42,6 +42,7 @@ const create = async (task: ITask, userId?: string) => {
   }
 
   task.user = userId
+  task.isChecked = false
 
   await connect()
 
@@ -59,6 +60,8 @@ const update = async (task: ITask, userId?: string) => {
   if (!task.name) {
     throw new Error("Informe o campo name!")
   }
+
+  task.isChecked = (task.isChecked) ? task.isChecked : false
 
   await connect()
 

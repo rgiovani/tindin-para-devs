@@ -1,7 +1,9 @@
+import { TaskService } from './../../services/tasks/tasks.service';
 import { AuthService } from '../../services/login/auth.service';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ITask } from 'api/types/ITask';
 
 @Component({
   selector: 'app-tasks',
@@ -11,58 +13,14 @@ import { Component, OnInit } from '@angular/core';
 export class TasksComponent implements OnInit {
 
   isTaskFormVisible = false
-
-  tasks = [
-    {
-      id: 0,
-      name: 'Fazer a API',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 1,
-      name: 'Integrar o front com o back',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-    {
-      id: 2,
-      name: 'Finalizar a atividade',
-      isOpen: false,
-      cardCss: {
-        'height': '8px',
-        'align-items': 'center'
-      },
-      cardRadius: {
-        'borderRadius': '9999px'
-      },
-      isChecked: false,
-      isEditing: false,
-    },
-  ]
-
+  tasks: any[] = []
   form: FormGroup
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
     private readonly authService: AuthService,
+    private readonly taskService: TaskService,
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -81,7 +39,7 @@ export class TasksComponent implements OnInit {
       }
     })
 
-    //ler todas as tasks e montar os cards
+    this.list()
   }
 
   setDone(isDone: boolean, id: number) {
@@ -122,6 +80,31 @@ export class TasksComponent implements OnInit {
     this.isTaskFormVisible = !this.isTaskFormVisible
     this.form.reset()
   }
+
+  list() {
+    this.taskService.listTasks().subscribe((data: any) => {
+      if (data.length > 0) {
+        data.forEach((task: any) => {
+          task.cardCss = {
+            'height': '8px',
+            'align-items': 'center'
+          }
+
+          task.cardRadius = {
+            'borderRadius': '9999px'
+          }
+
+          task.isChecked = false
+          task.isEditing = false
+
+          this.tasks.push(task)
+        });
+
+      }
+    }, (apiError: any) => {
+    })
+  }
+
 
   logout() {
     this.isTaskFormVisible = false

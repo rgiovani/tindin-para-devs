@@ -65,7 +65,7 @@ http://localhost:4200/
 - **[x]** O frontend deve permitir que o usuario ja logado na aplicação deslogue da aplicação.
 - **[]** O frontend deve possibilitar que o usuario recupere a sua conta.
 - **[x]** O frontend deve validar se o usuario ja esta logado na aplicação e redirecionar o usuario para a pagina correta em caso de refresh.
-- **[]** O frontend deve apresentar para o usuário a listagem de tarefas cadastradas.
+- **[x]** O frontend deve apresentar para o usuário a listagem de tarefas cadastradas.
 - **[]** O frontend deve permitir a criação de uma nova tarefa.
 - **[]** O frontend deve permitir a edição de uma tarefa cadastrada.
 - **[]** O frontend deve permitir a remoção de uma tarefa cadastrada.

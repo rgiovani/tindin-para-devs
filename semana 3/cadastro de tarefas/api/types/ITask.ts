@@ -1,7 +1,8 @@
 interface ITask {
   id?: string,
   user?: string,
-  name: string
+  name: string,
+  isChecked?: boolean
 }
 
 export {
