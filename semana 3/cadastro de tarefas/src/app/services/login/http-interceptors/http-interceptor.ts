@@ -12,7 +12,6 @@ export class HttpInterceptorDefault implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     req = req.clone({
       setHeaders: {
         'token': this.authService.getToken()

@@ -48,6 +48,20 @@ export class AuthComponent implements OnInit {
 
     this.reloadUiText()
   }
+  ngAfterViewInit() {
+
+    this.authService.isTokenValid().subscribe(
+      async (res: any) => {
+        this.router.navigate(['/tasks'])
+      }, (err) => {
+        this.welcome = true
+        this.login = false
+        this.register = false
+        this.router.navigate(['/auth'])
+      }
+    )
+
+  }
 
   reloadUiText() {
     this.UIText = {
@@ -76,8 +90,8 @@ export class AuthComponent implements OnInit {
       })
     }
 
-
     const data = this.form.getRawValue()
+
     if (this.login) {
       this.authService.login({ email: data.email, password: data.password }).subscribe(
         async (res: any) => {
@@ -99,7 +113,6 @@ export class AuthComponent implements OnInit {
           this.login = true
           this.register = false
           this.loading = false
-          this.send()
         },
         (err: any) => {
           this.loading = false

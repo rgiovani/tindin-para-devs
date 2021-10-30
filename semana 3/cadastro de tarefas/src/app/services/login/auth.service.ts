@@ -16,6 +16,10 @@ export class AuthService {
     private readonly httpClient: HttpClient
   ) { }
 
+  public isTokenValid(): Observable<any> {
+    return this.httpClient.get(`${this.url}/auth/validate`)
+  }
+
   public login(credentials: Credential): Observable<any> {
     return this.httpClient.post(`${this.url}/login`,
       {

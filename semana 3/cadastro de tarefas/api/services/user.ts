@@ -98,9 +98,14 @@ const recoverAccount = async (user: IUser) => {
   return true
 }
 
-const getById = async (_id: string) => {
+const getById = async (id: string) => {
   await connect()
-  return User.findById(_id)
+  return User.findOne({ _id: id })
+}
+
+const isTokenValid = async (id?: string) => {
+  await connect()
+  return await User.findById(id)
 }
 
 const listLog = async (page: number, perPage: number, userId?: string) => {
@@ -125,6 +130,6 @@ export {
   login,
   register,
   recoverAccount,
-  getById,
+  isTokenValid,
   listLog
 }

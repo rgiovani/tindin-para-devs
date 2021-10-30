@@ -14,7 +14,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit(): void {
-    //verificar se ja existe um token e logar o usuario
     this.router.navigate(['/auth'])
   }
+
 }

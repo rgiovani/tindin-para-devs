@@ -21,6 +21,8 @@ app.post('/login', user.login)
 app.post('/register', user.register)
 app.post('/recover', user.recoverAccount)
 
+app.get('/auth/validate', isLogged, user.checkIfTokenIsValid)
+
 app.get('/tasks', isLogged, task.list)
 app.get('/tasks/:id', isLogged, task.get)
 app.post('/tasks', isLogged, task.create)
