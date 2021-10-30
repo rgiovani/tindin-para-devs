@@ -67,6 +67,7 @@ export class TasksComponent implements OnInit {
 
         task.isChecked = (!!task.isChecked) ? true : false
         task.isEditing = false
+        task.isOpen = false
 
         this.tasks.push(task)
 
@@ -156,33 +157,63 @@ export class TasksComponent implements OnInit {
   }
 
   create() {
-    console.log("Criando", this.form.value)
-    this.toggleTaskForm()
-    // localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    //TODO: Criar um botão que irá permitir adicionar uma nova tarefa.
-    //- O botao habilitará um novo card no topo da listagem.
-    //- O card tera um input para colocar o nome, um botao salvar e um botao cancelar.
-    //- Se clicar em cancelar o card some.
-    //- Se salvar, o card permanece no topo e é adicionado no array de tasks
+    if (this.form.value) {
+      const { name } = this.form.value
+      this.taskService.createTask({ name: name }).subscribe(res => {
+        const task = {
+          _id: res.taskId,
+          user: res.userId,
+          name: name,
+          cardCss: {
+            'height': '8px',
+            'align-items': 'center'
+          },
+          cardRadius: {
+            'borderRadius': '9999px'
+          },
+          isChecked: false,
+          isEditing: false
+        }
+        this.tasks.push(task)
+
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        this.toggleTaskForm()
+        this.loadCard()
+        this.form.reset()
+      })
+    }
   }
 
   update(id: string) {
     const { name } = this.form.getRawValue()
-    this.tasks.find((item, index) => {
-      if (item._id === id) {
-        this.tasks[index].isOpen = false
-        this.tasks[index].isEditing = false
-        this.tasks[index].name = name
-      }
-    })
-    this.loadCard()
-    this.form.reset()
+    this.taskService.editTask({ id: id, name: name }).subscribe(res => {
+      this.tasks.find((item, index) => {
+        if (item._id === id) {
+          this.tasks[index].isOpen = false
+          this.tasks[index].isEditing = false
+          this.tasks[index].name = name
+        }
+      })
+      this.loadCard()
+      this.form.reset()
 
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    })
   }
 
   remove(id: string) {
-    console.log("Removendo...")
+    let taskPosition: number
+    this.taskService.removeTask(id).subscribe(res => {
+      this.tasks.find((item, index) => {
+        taskPosition = (item._id === id) ? index : taskPosition
+      })
+      this.tasks.splice(taskPosition, 1)
+
+      this.loadCard()
+      this.form.reset()
+
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    })
   }
 
 }

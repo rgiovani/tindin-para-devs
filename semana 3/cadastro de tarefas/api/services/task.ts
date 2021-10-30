@@ -46,10 +46,15 @@ const create = async (task: ITask, userId?: string) => {
 
   await connect()
 
-  await Task.create(task)
+  const taskId = await Task.create(task)
+
   await log(userId, 'Criação de tarefa')
 
-  return true
+  return {
+    taskId: taskId._id.toString(),
+    userId: userId
+
+  }
 }
 
 const update = async (task: any, userId?: string) => {

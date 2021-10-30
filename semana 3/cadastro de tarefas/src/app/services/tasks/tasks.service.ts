@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { iTasksCreate, iTasksEdit } from '../../model/tasks.model';
@@ -30,6 +30,18 @@ export class TaskService {
   public getTask(id: string | null): Observable<any> {
     return this.httpClient.get(
       `${this.url}/tasks/${id}`,
+    )
+  }
+
+  public removeTask(id: string): Observable<any> {
+    return this.httpClient.delete(
+      `${this.url}/tasks`,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        body: {
+          id: id
+        }
+      }
     )
   }
 

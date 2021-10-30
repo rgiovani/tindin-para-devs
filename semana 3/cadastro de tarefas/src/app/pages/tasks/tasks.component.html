@@ -22,7 +22,8 @@
       <div class="p-6 text-gray-500 text-base font-bold antialiased flex flex-row items-center">
 
         <form [formGroup]="form" (submit)="create()">
-          <input type="text" placeholder="Nome da tarefa" formControlName="name">
+          <input class="break-words w-64 h-10" type="text" placeholder="Nome da tarefa" formControlName="name"
+            minlength="3" maxlength="25" required>
 
           <div class="flex flex-row items-center mt-5">
             <button type="button" (click)="toggleTaskForm()"
