@@ -23,38 +23,9 @@ http://localhost:4200/
 <br>
 
 <p align="center">
-  Tela de bem vindo
+  Task App
   <br>
-  <img src="./src/assets/screenshots/bemvindo.png" width="250px">
-</p>
-<p align="center">
-  Tela de login
-  <br>
-  <img src="./src/assets/screenshots/login.png" width="250px">
-</p>
-
-<p align="center">
-  Tela de cadastro
-  <br>
-  <img src="./src/assets/screenshots/inscrever-se.png" width="250px">
-</p>
-
-<p align="center">
-  Tela de tarefas
-  <br>
-  <img src="./src/assets/screenshots/listagem.png" width="250px">
-</p>
-
-<p align="center">
-  Editar ou remover tarefa
-  <br>
-  <img src="./src/assets/screenshots/edicao-remocao.png" width="250px">
-</p>
-
-<p align="center">
-  Criar tarefa
-  <br>
-  <img src="./src/assets/screenshots/nova-tarefa.png" width="250px">
+  <img src="./src/assets/task-app.gif" width="250px">
 </p>
 
 ---
