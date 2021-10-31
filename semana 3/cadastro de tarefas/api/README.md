@@ -5,6 +5,8 @@
 npm start 
  ```
 
+ Renomeie o arquivo **.env copy** para apenas **.env**, assim a api consegue se conectar com o banco.
+
 <br>
 
 - A API utiliza uma função middleware chamada ***(isLogged)***, essa função verifica o valor da chave **token** passado no **headers** em cada requisição. Dessa forma, é possivel controlar se o usuário tem ou não permissão para acessar as rotas da API.
