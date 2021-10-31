@@ -1,9 +1,16 @@
 # Atividade #3 - Cadastro de tarefas
 
-### Para começar, digite no terminal:
+#### Para começar, vá até a pasta **api/** e digite no terminal:
  ``` 
 npm start 
  ```
+ 
+ #### Depois, volte para a pasta **cadastro de tarefas/** e em um novo terminal digite:
+ ``` 
+npm start 
+ ```
+ 
+ Certifique-se de manter os dois terminais abertos, tanto o da api quanto o do front
 
 ### Acesse:
 ```
