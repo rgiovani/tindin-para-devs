@@ -16,7 +16,7 @@
           <form class="" autocomplete="nope" [formGroup]="form" fxFlex="auto" fxLayout="column">
             <mat-form-field class="mb-2 w-full" fxFlex="grow" appearance="fill">
               <mat-label>E-mail</mat-label>
-              <input type="email" name="email" ngModel email="true" autocomplete="nope" formControlName="email" matInput
+              <input type="email" name="email" email="true" autocomplete="nope" formControlName="email" matInput
                 required>
               <mat-error *ngIf="form?.get('email')?.hasError('required')">
                 Informe seu e-mail
@@ -88,8 +88,7 @@
 
         <mat-form-field class="mb-2 w-full" fxFlex="grow" appearance="fill">
           <mat-label> {{UIText.email}}</mat-label>
-          <input type="email" name="email" ngModel email="true" autocomplete="nope" formControlName="email" matInput
-            required>
+          <input type="email" name="email" email="true" autocomplete="nope" formControlName="email" matInput required>
           <mat-error *ngIf="form?.get('email')?.hasError('required')">
             {{UIText.email}}
           </mat-error>
