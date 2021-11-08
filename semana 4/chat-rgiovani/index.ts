@@ -1,14 +1,19 @@
 import * as dotenv from 'dotenv'
-
-import express from 'express'
 import cors from 'cors'
+
+import * as express from 'express'
+import * as socketio from 'socket.io'
+import * as http from 'http'
+
 import * as note from './controllers/note'
+
 dotenv.config()
 
-const app = express()
+const app = express.default()
+const PORT = 3000
+
 app.use(express.json())
 app.use(cors())
-const PORT = 3000
 
 app.use(express.static('www'))
 
@@ -18,6 +23,23 @@ app.post('/notes', note.create)
 app.put('/notes', note.update)
 app.delete('/notes', note.remove)
 
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: API rodando em http://localhost:${PORT}`)
+const server = http.createServer(app)
+const io = new socketio.Server(server)
+
+io.on('connection', (socket: any) => {
+  console.log('[connection]:', socket.client.id)
+
+  socket.on('message', (data: any) => {
+    console.log('message:', data)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('[disconnection]:', socket.client.id)
+  })
+})
+
+io
+
+server.listen(3000, function () {
+  console.log(`Running at localhost:${PORT}`)
 })
