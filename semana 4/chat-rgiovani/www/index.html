@@ -6,15 +6,28 @@
         <title>Document</title>
     </head>
     <body>
-        <button onClick="sendMsg()">Hit Me</button>
+        <textarea id="msg" cols="30" rows="10" placeholder="Digite sua mensagem"></textarea>
+        <button onClick="sendMsg()">Enviar mensagem</button>
+        <div id="list"></div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
         <script>
             const socket = io("");
+            document.getElementById('list').innerHTML = ''
 
             function sendMsg() {
-                socket.emit("message", "HELLO WORLD");
+                const msg = document.getElementById('msg').value
+                if (!msg) {
+                    alert('Digite uma mensagem')
+                    return
+                }
+                socket.emit("message", { msg: msg });
             }
+
+            socket.on('message', (data) => {
+                console.log('server:', data)
+                document.getElementById('list').innerHTML += `<div>${data.msg}</div>`
+            })
         </script>
     </body>
 </html>

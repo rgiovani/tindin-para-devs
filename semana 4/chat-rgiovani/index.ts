@@ -31,14 +31,13 @@ io.on('connection', (socket: any) => {
 
   socket.on('message', (data: any) => {
     console.log('message:', data)
+    io.emit('message', data)
   })
 
   socket.on('disconnect', () => {
     console.log('[disconnection]:', socket.client.id)
   })
 })
-
-io
 
 server.listen(3000, function () {
   console.log(`Running at localhost:${PORT}`)
