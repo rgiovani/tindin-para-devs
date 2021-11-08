@@ -38,5 +38,12 @@
 - [x] Front com paginação
 - [x] Atividade #3 - Cadastro de tarefas
 
+### **SEMANA 4**
+
+- [] Socket
+- [] Upload de arquivos
+- [] Socket e upload de arquivos no front
+- [] Publicando sua aplicação
+
 Informações sobre o evento: 
  - https://www.tindin.com.br/post/curso-dev
