@@ -57,12 +57,12 @@ http://localhost:4200
 ---
 
 #### **Os requisitos:**
-- **[x]** O frontend deve possibilitar que o usuario entre com uma conta; pré-cadastrada no banco de dados.
-- **[x]** O frontend deve validar se o usuario ja esta logado na aplicação e redirecionar o usuario para a pagina correta em caso de refresh ou navegador fechado.
-- **[x]** O frontend deve permitir que o usuario ja logado na aplicação deslogue da aplicação.
-- **[x]** O frontend deve apresentar para o usuário a listagem de aulas cadastradas.
-- **[x]** O frontend deve permitir a criação de uma nova aula.
-- **[x]** O frontend deve permitir a edição de uma aula cadastrada.
-- **[x]** O frontend deve permitir a remoção de uma aula cadastrada.
+- [x] O frontend deve possibilitar que o usuario entre com uma conta; pré-cadastrada no banco de dados.
+- [x] O frontend deve validar se o usuario ja esta logado na aplicação e redirecionar o usuario para a pagina correta em caso de refresh ou navegador fechado.
+- [x] O frontend deve permitir que o usuario ja logado na aplicação deslogue da aplicação.
+- [x] O frontend deve apresentar para o usuário a listagem de aulas cadastradas.
+- [x] O frontend deve permitir a criação de uma nova aula.
+- [x] O frontend deve permitir a edição de uma aula cadastrada.
+- [x] O frontend deve permitir a remoção de uma aula cadastrada.
 
 ---
