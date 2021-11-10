@@ -40,7 +40,9 @@
 
 ### **SEMANA 4**
 
-- [ ] Socket
+- [x] Socket
+    - Desafios
+        - [x] Criar um chat utilizando socket e mongodb
 - [ ] Upload de arquivos
 - [ ] Socket e upload de arquivos no front
 - [ ] Publicando sua aplicação
