@@ -42,7 +42,7 @@
 
 - [x] Socket
     - Desafios
-        - [ ] Criar um chat utilizando socket e mongodb
+        - [ ] Criar um chat com login utilizando socket.io e mongodb
 - [ ] Upload de arquivos
 - [ ] Socket e upload de arquivos no front
 - [ ] Publicando sua aplicação
