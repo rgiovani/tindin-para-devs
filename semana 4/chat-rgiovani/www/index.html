@@ -3,31 +3,49 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css">
         <title>Document</title>
     </head>
     <body>
-        <textarea id="msg" cols="30" rows="10" placeholder="Digite sua mensagem"></textarea>
-        <button onClick="sendMsg()">Enviar mensagem</button>
-        <div id="list"></div>
+        <div class="container">
+            <div id="username"></div>
+
+            <div id="login">
+                <div class="email">
+
+                </div>
+
+                <div class="email">
+                    <label>E-mail</label>
+                    <input id="email" type="email" placeholder="Digite seu e-mail" maxlength="70">
+                </div>
+
+                <div class="pass">
+                    <label>Password</label>
+                    <input id="password" type="password" placeholder="Digite sua senha" maxlength="70">
+                </div>
+
+                <button onClick="sendLogin()">Join</button>
+            </div>
+
+            <div id="chat">
+                <div class="chat-content">
+                    <div id="list"></div>
+                    <div class="msg-container">
+                        <textarea id="msg" cols="30" rows="10" maxlength="120"
+                            placeholder="Digite sua mensagem"></textarea>
+                        <button onClick="sendMsg()">Enviar</button>
+                    </div>
+                </div>
+                <div class="chat-panel">
+                    <span>Usuarios online</span>
+                    <div id="users"></div>
+                </div>
+            </div>
+        </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
-        <script>
-            const socket = io("");
-            document.getElementById('list').innerHTML = ''
-
-            function sendMsg() {
-                const msg = document.getElementById('msg').value
-                if (!msg) {
-                    alert('Digite uma mensagem')
-                    return
-                }
-                socket.emit("message", { msg: msg });
-            }
-
-            socket.on('message', (data) => {
-                console.log('server:', data)
-                document.getElementById('list').innerHTML += `<div>${data.msg}</div>`
-            })
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="index.js"></script>
     </body>
 </html>
