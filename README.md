@@ -40,10 +40,10 @@
 
 ### **SEMANA 4**
 
-- [] Socket
-- [] Upload de arquivos
-- [] Socket e upload de arquivos no front
-- [] Publicando sua aplicação
+- [ ] Socket
+- [ ] Upload de arquivos
+- [ ] Socket e upload de arquivos no front
+- [ ] Publicando sua aplicação
 
 Informações sobre o evento: 
  - https://www.tindin.com.br/post/curso-dev
