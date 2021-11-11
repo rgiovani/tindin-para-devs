@@ -2,7 +2,6 @@ import { IMessage } from "../types/IMessage"
 import { connect } from '../libs/mongodb'
 
 import { Message } from '../models/messageModel'
-import { User } from '../models/userModel'
 
 import * as socket from '../libs/socket'
 
@@ -23,18 +22,18 @@ const list = async (page: number, perPage: number, userId?: string) => {
     return result
 }
 
-const create = async (message: IMessage, socketId: string, userId?: string) => {
+const create = async (message: IMessage, socketId: string, name: string, userId?: string) => {
     await connect()
 
     if (!message.text) {
         throw new Error("Informe o campo text!")
     }
 
-    const userFounded = await User.findOne({ _id: userId })
     message.user = userId
 
-    await Message.create({ ...message, username: userFounded.name })
-    socket.emitEvent('message', socketId, { user: userFounded.name, msg: message.text })
+    await Message.create({ ...message, username: name })
+
+    socket.emitEvent('message', socketId, { user: name, msg: message.text })
 
     return true
 }

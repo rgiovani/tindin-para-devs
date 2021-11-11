@@ -7,7 +7,7 @@ import { IUser } from "../types/IUser"
 import { User } from '../models/userModel'
 import * as socket from '../libs/socket';
 
-const usersConnected: any[] = []
+let usersConnected: any[] = []
 
 const login = async (user: IUser, socketId: string) => {
     await connect()
@@ -36,11 +36,10 @@ const login = async (user: IUser, socketId: string) => {
     }, process.env.JWT_SECRET ?? 'emptyjwt', {})
 
     usersConnected.push({ name: userFounded.name, email: userFounded.email, userSocketId: socketId })
-    const data = JSON.stringify({ usersOnChat: usersConnected })
 
-    socket.emitEvent('user_connected', socketId, data)
+    socketUpdateConections(socketId)
 
-    return { token }
+    return { token, username: userFounded.name }
 }
 
 const register = async (user: IUser) => {
@@ -84,20 +83,42 @@ const isTokenValid = async (id: string, socketId: string) => {
     if (!isOnList)
         usersConnected.push({ name: userFounded.name, email: userFounded.email, userSocketId: socketId })
 
-    const data = JSON.stringify({ usersOnChat: usersConnected })
-
-    socket.emitEvent('user_connected', socketId, data)
+    socketUpdateConections(socketId)
 
     return userFounded
 }
 
-const userLeft = async (socketId: string) => {
-    return { usersOnChat: usersConnected }
+const socketUpdateConections = (socketId: string) => {
+    const data = JSON.stringify({ usersOnChat: usersConnected })
+
+    socket.emitEvent('user_connected', socketId, data)
+
+    const currentUserSocket = socket.getSocketById(socketId)
+
+    if (currentUserSocket) {
+        currentUserSocket.on('user_left', (socketIdDisconnected: string) => {
+            socket.io.emit('list_users', userLeft(socketIdDisconnected))
+        })
+    }
+}
+
+const userLeft = (socketIdDisconnected: any) => {
+    let tmp: any[] = []
+
+    usersConnected.find((user) => {
+        if (user.userSocketId !== socketIdDisconnected) {
+            tmp.push(user)
+        }
+    })
+
+    usersConnected = tmp
+
+    return JSON.stringify({ usersOnChat: usersConnected })
 }
 
 export {
     login,
     register,
-    isTokenValid,
-    userLeft
+    userLeft,
+    isTokenValid
 }

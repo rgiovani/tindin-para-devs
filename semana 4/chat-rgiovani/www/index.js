@@ -4,6 +4,29 @@ let token
 
 let userLogged = false
 
+function handleSockets() {
+    socket.on('connection:sid', function (socketId) {
+        userSocketId = socketId
+        verifyToken(token)
+
+        socket.on('message', (data) => {
+            renderMessages([data])
+        })
+
+        socket.on('user_connected', (data) => {
+            renderUserList(data)
+        })
+
+        socket.on('user_disconnected', (data) => {
+            socket.emit('user_left', data)
+        })
+
+        socket.on('list_users', (data) => {
+            renderUserList(data)
+        })
+    });
+}
+
 function sendLogin() {
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
@@ -24,6 +47,8 @@ function sendLogin() {
         data: JSON.stringify({ email: email, password: password, socketId: userSocketId }),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            $('#username').html('')
+            $('#username').append(`<span>${data.username}</span>`)
             sessionStorage.setItem('token', data.token)
             userLogged = true
             chat()
@@ -56,8 +81,7 @@ function sendMsg() {
     })
 }
 
-function verifyToken(token) {
-
+function verifyToken(token) { //Tem que validar aqui para pegar o nome da pessoa
     if (token && !userLogged) {
         $.ajax({
             type: 'post',
@@ -82,13 +106,22 @@ function verifyToken(token) {
 }
 
 function renderUserList(userData) {
-    const { username, usersOnChat } = JSON.parse(userData)
+    if (userData) {
+        userData = JSON.parse(userData)
+        const { usersOnChat } = userData
 
-    $('#users').html('')
+        let users = usersOnChat.filter((user, index, self) =>
+            index === self.findIndex((u) => (
+                u.name === user.name && u.email === user.email
+            ))
+        )
 
-    usersOnChat.find(otherUser => {
-        document.getElementById('users').innerHTML += `<div class="user-name"><span>${otherUser.name}</span></div>`
-    })
+        $('#users').html('')
+
+        users.find(otherUser => {
+            document.getElementById('users').innerHTML += `<div class="user-name"><span>${otherUser.name}</span></div>`
+        })
+    }
 }
 
 function renderMessages(data) {
@@ -98,10 +131,7 @@ function renderMessages(data) {
 }
 
 function chat() {
-    socket.on('connection:sid', function (socketId) {
-        userSocketId = socketId
-        verifyToken(token)
-    });
+    handleSockets()
 
     $('#msg').html('')
 
@@ -118,46 +148,16 @@ function chat() {
             headers: { 'token': token },
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-
+                $('#list').html('')
                 if (res.length > 0) {
                     renderMessages(res)
                 }
-                socket.on('message', (data) => {
-                    renderMessages([data])
-
-                })
             },
             error: function (res) {
                 alert(res.responseJSON.message);
             }
         })
-
-
     }
-
-    socket.on('user_connected', (data) => {
-        renderUserList(data)
-        verifyToken(token)
-    })
-
-    socket.on('user_disconnected', (socketId) => {
-        $.ajax({
-            type: 'post',
-            url: '/user/logout',
-            data: JSON.stringify({ socketId: socketId }),
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-
-            },
-            error: function (res) {
-                alert(res.responseJSON.message);
-            }
-        })
-    })
-
-    socket.on('list_users', (data) => {
-        renderUserList(data)
-    })
 }
 
 chat()

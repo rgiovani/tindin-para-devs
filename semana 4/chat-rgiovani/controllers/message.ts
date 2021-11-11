@@ -18,7 +18,9 @@ const create = async (req: Request<any>, res: Response<any>) => {
         const { _id: userId } = req.user
         const text = req.body.text
         const socketId = req.body.socketId
-        const messageCreated = await message.create({ text }, socketId, userId)
+        const name = (req.user.name) ? req.user.name : 'unknown'
+
+        const messageCreated = await message.create({ text }, socketId, name, userId)
         return res.json(messageCreated)
     } catch (err: any) {
         return error(res, err)

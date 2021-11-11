@@ -1,33 +1,40 @@
 const socketsConnected: any[] = []
+
 let io: any
+
 
 const initIo = (ioInstance: any) => {
     io = ioInstance
     stabilishConnection()
 }
 
+
+const getSocketById = (socketId: any) => {
+    let index = socketsConnected.findIndex(socket => socket.client.id === socketId)
+    return socketsConnected[index]
+}
+
 const stabilishConnection = () => {
     if (io) {
         io.on('connection', (socket: any) => {
             socketsConnected.push(socket)
-
             socket.emit('connection:sid', socket.client.id)
 
             socket.on('disconnect', () => {
+                let position = -1
+                socketsConnected.find((socketConnected, index) => {
+                    if (socket.client.id === socketConnected.client.id) {
+                        position = index
+                    }
+                })
+
+                if (position > -1) {
+                    socketsConnected.splice(position, 1)
+                }
+
                 io.emit('user_disconnected', socket.client.id)
-
-                const position = socketsConnected.findIndex(socketConnected => socket.client.id === socketConnected.client.id)
-                socketsConnected.splice(position, 1)
             })
-
-            socket.on('message', (data: any) => {
-                io.emit('message', data)
-            })
-
-
         })
-
-
     }
 }
 
@@ -44,5 +51,6 @@ export {
     initIo,
     stabilishConnection,
     emitEvent,
+    getSocketById,
     io
 }

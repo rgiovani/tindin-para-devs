@@ -41,19 +41,8 @@ const checkIfTokenIsValid = async (req: Request<any>, res: Response<any>) => {
   }
 }
 
-const userLogout = async (req: Request<any>, res: Response<any>) => {
-  try {
-    const socketId = req.body.socketId
-    const users = await userService.userLeft(socketId)
-    return res.json(users)
-  } catch (err: any) {
-    return error(res, err)
-  }
-}
-
 export {
   login,
   register,
-  userLogout,
   checkIfTokenIsValid
 }

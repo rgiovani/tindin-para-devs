@@ -22,8 +22,6 @@ app.use(cors())
 app.use(express.static('www'))
 
 app.post('/login', user.login)
-app.post('/user/logout', user.userLogout)
-
 app.post('/auth/validate', isLogged, user.checkIfTokenIsValid)
 
 app.get('/chat/messages', isLogged, message.list)
