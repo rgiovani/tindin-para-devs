@@ -8,6 +8,7 @@ import { User } from '../models/userModel'
 import * as socket from '../libs/socket';
 
 let usersConnected: any[] = []
+let socketIdsConnected: any[] = []
 
 const login = async (user: IUser, socketId: string) => {
     await connect()
@@ -17,6 +18,8 @@ const login = async (user: IUser, socketId: string) => {
 
     if (!user.password)
         throw new Error("Informe o campo password!")
+
+    socketIdsConnected = socket.socketsIdsConnected
 
     const userFounded = await User.findOne({ email: user.email })
 
@@ -68,10 +71,13 @@ const register = async (user: IUser) => {
     return true
 }
 
-const isTokenValid = async (id: string, socketId: string) => {
+const isTokenValid = async (id: string, socketId: string, socketsOnline: string[]) => {
     await connect()
+
     const userFounded = await User.findById(id)
     let isOnList = false
+
+    socketIdsConnected = socketsOnline
 
     usersConnected.find((user) => {
         if (user.email == userFounded.email) {
@@ -89,6 +95,10 @@ const isTokenValid = async (id: string, socketId: string) => {
 }
 
 const socketUpdateConections = (socketId: string) => {
+    if (socketIdsConnected.length == 1 && usersConnected.length > 1) {
+        usersConnected.splice(0, 1)
+    }
+
     const data = JSON.stringify({ usersOnChat: usersConnected })
 
     socket.emitEvent('user_connected', socketId, data)

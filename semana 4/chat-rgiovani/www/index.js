@@ -4,10 +4,12 @@ let token
 
 let userLogged = false
 
+let warningUserMsg = 'Bem vindo,'
+
 function handleSockets() {
-    socket.on('connection:sid', function (socketId) {
-        userSocketId = socketId
-        verifyToken(token)
+    socket.on('connection:sid', function (data) {
+        userSocketId = data.socketId
+        verifyToken(token, data.socketsOnline)
 
         socket.on('message', (data) => {
             renderMessages([data])
@@ -46,10 +48,10 @@ function sendLogin() {
         url: '/login',
         data: JSON.stringify({ email: email, password: password, socketId: userSocketId }),
         contentType: "application/json; charset=utf-8",
-        success: function (data) {
+        success: function (res) {
             $('#username').html('')
-            $('#username').append(`<span>${data.username}</span>`)
-            sessionStorage.setItem('token', data.token)
+            $('#username').append(`<span>${warningUserMsg} ${res.username}</span>`)
+            sessionStorage.setItem('token', res.token)
             userLogged = true
             chat()
         },
@@ -81,19 +83,19 @@ function sendMsg() {
     })
 }
 
-function verifyToken(token) { //Tem que validar aqui para pegar o nome da pessoa
+function verifyToken(token, socketsOnline) {
     if (token && !userLogged) {
         $.ajax({
             type: 'post',
             url: '/auth/validate',
             headers: { 'token': token },
-            data: JSON.stringify({ socketId: userSocketId }),
+            data: JSON.stringify({ socketId: userSocketId, socketsOnline: socketsOnline }),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 if (!!res.isValid) {
                     userLogged = res
                     $('#username').html('')
-                    $('#username').append(`<span>${res.username}</span>`)
+                    $('#username').append(`<span>${warningUserMsg} ${res.username}</span>`)
 
                     chat()
                 }

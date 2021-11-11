@@ -31,9 +31,10 @@ const checkIfTokenIsValid = async (req: Request<any>, res: Response<any>) => {
   try {
     const { _id: userId } = req.user
     const socketId = req.body.socketId
+
     let user
     if (userId)
-      user = await userService.isTokenValid(userId, socketId)
+      user = await userService.isTokenValid(userId, socketId, req.body.socketsOnline)
 
     return res.json((user) ? { username: user.name, isValid: true } : { username: 'unknown user', isValid: false })
   } catch (err: any) {
