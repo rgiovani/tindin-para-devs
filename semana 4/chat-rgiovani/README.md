@@ -10,7 +10,18 @@
 
 ---
 
- A aplicação deve:
+- Os usuários do gif acima foram cadastrados no banco de dados com o uso do Postman.
+- Rota: 
+  - **registrar** -> *(POST)*
+    - route: **/register** 
+    - *Body(JSON)*
+    ```
+      { "name": "username", "email": "user@mail.com", "password": "123" }
+    ``` 
+
+    <br>
+
+ ## A aplicação deve:
 
 - [x] Permitir que o usuario realize o login.
 - [x] Listar os usuarios conectados no chat.
@@ -19,3 +30,8 @@
 - [x] Desconectar os usuarios da lista do chat.
 - [x] Possuir paginação (ultimas 20 mensagens mais recente com data e horario).
 - [x] O backend deve salvar a mensagem no banco e emitir a mensagem para os outros usuarios.
+
+---
+
+### **TEMPLATE:**
+- [Template-usando-nodejs+express+typescript+mongodb](https://github.com/fabiotindin/template-node-ts-mongodb)
