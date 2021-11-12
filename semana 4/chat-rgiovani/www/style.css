@@ -121,6 +121,7 @@ input {
 }
 
 .user-message {
+    flex-direction: row;
     color: rgb(77, 77, 77);
     font-size: 16px;
     font-weight: bold; 
@@ -128,6 +129,11 @@ input {
     padding-top: 8px;
     padding-bottom: 5px;
     width: 400px;
+}
+
+.user-message-date{
+    color: rgba(77, 77, 77, 0.89);
+    font-size: 12px;
 }
 
 .msg-container{

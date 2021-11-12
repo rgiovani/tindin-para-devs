@@ -11,6 +11,7 @@ let usersConnected: any[] = []
 let socketIdsConnected: any[] = []
 
 const login = async (user: IUser, socketId: string) => {
+
     await connect()
 
     if (!user.email)
@@ -95,7 +96,15 @@ const isTokenValid = async (id: string, socketId: string, socketsOnline: string[
 }
 
 const socketUpdateConections = (socketId: string) => {
-    if (socketIdsConnected.length == 1 && usersConnected.length > 1) {
+    let usersValid = false
+
+    socketIdsConnected.find(id => {
+        if (id === usersConnected[0].userSocketId) {
+            usersValid = true
+        }
+    })
+
+    if (!usersValid) {
         usersConnected.splice(0, 1)
     }
 

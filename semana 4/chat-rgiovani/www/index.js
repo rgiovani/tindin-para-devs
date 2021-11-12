@@ -1,9 +1,7 @@
 const socket = io("");
 var userSocketId = ''
 let token
-
 let userLogged = false
-
 let warningUserMsg = 'Bem vindo,'
 
 function handleSockets() {
@@ -126,9 +124,48 @@ function renderUserList(userData) {
     }
 }
 
+function getDateTime(date) {
+    let today = new Date()
+    let currentUserDay = today.getDate();
+    let currentUserMonth = today.getMonth() + 1;
+    let currentUserYear = today.getFullYear();
+
+    date = new Date(date)
+    let userDay = date.getDate();
+    let userMonth = date.getMonth() + 1;
+    let userYear = date.getFullYear();
+
+    let message
+
+    if (userDay == currentUserDay && userMonth == currentUserMonth && userYear == currentUserYear) {
+        message = 'hoje'
+    } else if (userDay == currentUserDay - 1 && userMonth == currentUserMonth && userYear == currentUserYear) {
+        message = 'ontem'
+    } else {
+        message = 'antigo'
+    }
+
+    let time = {
+        hour: date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
+        msg: message
+    }
+
+    return time
+}
+
 function renderMessages(data) {
+    let msg
     data.find(message => {
-        document.getElementById('list').innerHTML += `<div class="user-message">${message.user}: ${message.msg}</div>`
+        const time = getDateTime(message.createdAt)
+
+
+        msg = '<div class="user-message">'
+        msg += `${message.user}: ${message.msg}`
+        msg += `<div class="user-message-date">${time.msg} - ${time.hour}</div>`
+        msg += '</div>'
+
+
+        document.getElementById('list').innerHTML += msg
     })
 }
 
@@ -144,9 +181,10 @@ function chat() {
     } else {
         $('#login').hide()
         $('#chat').show()
+
         $.ajax({
             type: 'get',
-            url: '/chat/messages',
+            url: `/chat/messages?perPage=20`,
             headers: { 'token': token },
             contentType: "application/json; charset=utf-8",
             success: function (res) {

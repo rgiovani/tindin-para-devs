@@ -29,5 +29,5 @@ const create = async (req: Request<any>, res: Response<any>) => {
 
 export {
     list,
-    create
+    create,
 }
