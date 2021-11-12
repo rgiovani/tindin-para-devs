@@ -30,7 +30,7 @@
 - [x] Desconectar os usuarios da lista do chat.
 - [x] Possuir paginação (ultimas 20 mensagens mais recente com data e horario).
 - [x] Salvar a mensagem no banco e emitir a mensagem para os outros usuarios.
-- [ ] Pormitir que o usuario envie uma imagem no chat
+- [ ] Permitir que o usuario envie uma imagem no chat
 
 ---
 
