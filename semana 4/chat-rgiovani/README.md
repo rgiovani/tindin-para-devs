@@ -5,7 +5,7 @@
 <p align="center">
   Chat App
   <br>
-  <img src="./app.gif" width="550px">
+  <img src="./app.gif" width="950px">
 </p>
 
 ---
