@@ -42,8 +42,10 @@
 
 - [x] Socket
     - Desafios
-        - [ ] Criar um chat com login utilizando socket.io e mongodb
-- [ ] Upload de arquivos
+        - [x] Criar um chat com login utilizando socket.io e mongodb
+- [x] Upload de arquivos
+    - Desafios
+        - [ ] Adicionar upload de imagens no chat
 - [ ] Socket e upload de arquivos no front
 - [ ] Publicando sua aplicação
 
