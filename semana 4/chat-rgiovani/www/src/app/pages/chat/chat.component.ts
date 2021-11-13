@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit {
     })
 
     this.username = this.chatService.getUserName()
-    this.users = this.chatService.getUsersOnline() //atualizar o user
+    this.users = this.chatService.getUsersOnline()
 
     this.handleSockets()
 
