@@ -19,7 +19,7 @@ const PORT = 3000
 app.use(express.json())
 app.use(cors())
 
-app.use(express.static('www'))
+// app.use(express.static('../www'))
 
 app.post('/login', user.login)
 app.post('/register', user.register)
@@ -29,7 +29,11 @@ app.get('/chat/messages', isLogged, message.list)
 app.post('/chat/messages', isLogged, message.create)
 
 const server = http.createServer(app)
-const io = new socketio.Server(server)
+const io = new socketio.Server(server, {
+  cors: {
+    origin: '*'
+  }
+})
 
 initIo(io)
 

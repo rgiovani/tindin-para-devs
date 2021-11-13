@@ -1,0 +1,54 @@
+<div class="w-full h-full bg-gray-200">
+
+  <div class="flex justify-center items-center w-full h-full bg-pattern-local">
+
+    <div class="card overflow-hidden bg-white w-full max-w-xs round-border rounded-3xl shadow-md">
+      <div class="p-6" fxLayout="column" fxLayoutGap="16px">
+
+        <form class="pb-5" autocomplete="nope" [formGroup]="form" fxFlex="auto" fxLayout="column">
+          <mat-form-field class="mb-2 w-full" fxFlex="grow" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input type="email" name="email" email="true" autocomplete="nope" formControlName="email" matInput required>
+            <mat-error *ngIf="form?.get('email')?.hasError('required')">
+              Informe seu e-mail
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="w-full" fxFlex="grow" appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input [type]="inputType" autocomplete="nope" formControlName="password" matInput required>
+            <button (click)="toggleVisibility()" mat-icon-button matSuffix
+              matToolTip="{{visible ? 'Esconder senha : 'Visualizar senha'}}" type="button">
+              <mat-icon *ngIf="visible">visibility</mat-icon>
+              <mat-icon *ngIf="!visible">visibility_off</mat-icon>
+            </button>
+            <mat-error *ngIf="form?.get('password')?.hasError('required')">
+              Informe sua senha
+            </mat-error>
+          </mat-form-field>
+
+        </form>
+
+        <div *ngIf="!loading">
+          <div class="p-2 ">
+            <button (click)="send()" class="pt-3 pb-3 text-base rounded w-full bg-green-400 text-white" type="submit">
+              Juntar-se
+            </button>
+          </div>
+        </div>
+
+        <div class={{css.loadIcon.state}} fxLayoutAlign="center center">
+          <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="p-6 flex justify-center" fxLayoutAlign="center center">
+    <mat-spinner *ngIf="loading" diameter="38"></mat-spinner>
+  </div>
+</div>

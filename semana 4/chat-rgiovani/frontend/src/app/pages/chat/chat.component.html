@@ -1,0 +1,45 @@
+<div class="w-full h-full bg-gray-200">
+  <div class="container items-center shadow-md">
+    <div class="text-gray-700 text-center text-xl mr-24 ">
+      Bem vindo, {{username}}
+    </div>
+
+    <div id="chat">
+      <div class="chat-content bg-gray-50 border-2 border-indigo-100">
+
+        <div id="list" *ngFor="let message of messages">
+          <div class="user-message text-gray-700">
+            {{message.user}}
+            <span class="text-gray-500 font-normal">
+              {{message.msg}}
+            </span>
+
+            <div class="text-gray-400 text-xs font-normal">
+              {{message.time.msg}} - {{message.time.hour}}
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-container">
+          <button class="send-img-button bg-indigo-500 text-white rounded-full mr-2 item-center" onClick="sendImage()">
+            <mat-icon class="text-white text-x1">image</mat-icon>
+          </button>
+
+          <textarea #textArea class="bg-white border-2 border-indigo-100" id="msg" cols="30" rows="10" maxlength="120"
+            placeholder="Digite sua mensagem"></textarea>
+          <button class="send-msg-button bg-green-300 text-white" (click)="send(textArea.value)">
+            <mat-icon class="text-white">send</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="chat-panel">
+        <span class="text-indigo-500">Usuarios online</span>
+
+        <div id="users" *ngFor="let user of users">
+          <div>{{user.name}}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,7 +43,7 @@ const login = async (user: IUser, socketId: string) => {
 
     socketUpdateConections(socketId)
 
-    return { token, username: userFounded.name }
+    return { token, username: userFounded.name, usersOnline: usersConnected }
 }
 
 const register = async (user: IUser) => {
@@ -92,7 +92,7 @@ const isTokenValid = async (id: string, socketId: string, socketsOnline: string[
 
     socketUpdateConections(socketId)
 
-    return userFounded
+    return { name: userFounded.name, usersOnline: usersConnected }
 }
 
 const socketUpdateConections = (socketId: string) => {
@@ -111,7 +111,6 @@ const socketUpdateConections = (socketId: string) => {
     const data = JSON.stringify({ usersOnChat: usersConnected })
 
     socket.emitEvent('user_connected', socketId, data)
-
     const currentUserSocket = socket.getSocketById(socketId)
 
     if (currentUserSocket) {
