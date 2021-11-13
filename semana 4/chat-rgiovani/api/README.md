@@ -2,25 +2,6 @@
 
 <br>
 
-<p align="center">
-  Chat App
-  <br>
-  <img src="./app.gif" width="950px">
-</p>
-
----
-
-- Os usuários do gif acima foram cadastrados no banco de dados com o uso do Postman.
-- Rota: 
-  - **registrar** -> *(POST)*
-    - route: **/register** 
-    - *Body(JSON)*
-    ```
-      { "name": "username", "email": "user@mail.com", "password": "123" }
-    ``` 
-
-    <br>
-
  ## A aplicação deve:
 
 - [x] Permitir que o usuario realize o login.
