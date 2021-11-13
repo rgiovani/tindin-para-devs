@@ -56,7 +56,6 @@ export class AuthComponent implements OnInit {
         this.chatService.setUserName(res.username)
         this.chatService.setUsersOnline(res.usersOnline)
         sessionStorage.setItem('token', res.token)
-
         this.form.reset()
         return this.router.navigate(['/chat'])
       }, (err: any) => {

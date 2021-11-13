@@ -1,4 +1,9 @@
-<div class="w-full h-full bg-gray-200">
+<div class="w-full h-full bg-gray-200 grid justify-items-center items-center">
+  <div class="button-logout">
+    <button class="rounded-full pl-1 pr-1 pt-1 bg-red-400 text-white">
+      <mat-icon class="text-white" (click)="logout()">logout</mat-icon>
+    </button>
+  </div>
 
   <div class="container items-center shadow-md">
     <div class="text-gray-700 text-center text-xl mr-24 ">
@@ -39,7 +44,6 @@
         <div id="users" *ngFor="let user of users">
           <div>{{user.name}}</div>
         </div>
-
       </div>
     </div>
   </div>

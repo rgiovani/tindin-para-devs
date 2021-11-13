@@ -1,8 +1,10 @@
+import { AuthService } from './../../services/login/auth.service';
 import { ChatService } from './../../services/chat.service';
 import { Component, OnInit } from '@angular/core';
 
 import { WebSocketServiceService } from './../../services/web-socket-service.service';
 import { MessageService } from './../../services/messages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -15,10 +17,16 @@ export class ChatComponent implements OnInit {
   users: any = []
 
   constructor(
+    private readonly router: Router,
     private webSocketService: WebSocketServiceService,
     private chatService: ChatService,
+    private readonly authService: AuthService,
     private messageService: MessageService
-  ) { }
+  ) {
+    if (!sessionStorage.getItem('token')) {
+      this.router.navigate(['/auth'])
+    }
+  }
 
   ngOnInit(): void {
     this.messageService.listMessage().subscribe(async (res: any) => {
@@ -35,8 +43,6 @@ export class ChatComponent implements OnInit {
 
   }
 
-
-
   send(text: string) {
     const { socketDataConnected } = this.webSocketService
     this.messageService.sendMessage({ text: text, socketId: socketDataConnected.socketId }).subscribe(async (res: any) => {
@@ -45,6 +51,11 @@ export class ChatComponent implements OnInit {
   }
 
   sendImage() { }
+
+  logout() {
+    sessionStorage.removeItem('token')
+    window.location.reload()
+  }
 
   getDateTime(date: any) {
     let today = new Date()
@@ -88,7 +99,6 @@ export class ChatComponent implements OnInit {
       (data: any) => {
         if (data) {
           data = JSON.parse(data)
-
           this.chatService.setUsersOnline(data.usersOnChat)
           this.users = this.chatService.getUsersOnline()
         }

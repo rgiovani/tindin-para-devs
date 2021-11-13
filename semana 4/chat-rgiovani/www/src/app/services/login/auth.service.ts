@@ -1,7 +1,7 @@
 import { ISocketDataConnected } from '../../model/SocketDataConnected';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Credential } from '../../model/Credential.model'
@@ -37,12 +37,6 @@ export class AuthService {
         password: credentials.password,
         socketId: credentials.socketId
       })
-  }
-
-  public logout() {
-    if (sessionStorage.getItem('token'))
-      sessionStorage.removeItem('token')
-
   }
 
   public getToken(): string {
