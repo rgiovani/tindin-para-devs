@@ -1,9 +1,11 @@
 import mongoose, { Schema } from 'mongoose'
 
 const messageSchema = new mongoose.Schema({
+    fileName: {
+        type: String,
+    },
     text: {
         type: String,
-        required: true
     },
     user: {
         type: Schema.Types.ObjectId,

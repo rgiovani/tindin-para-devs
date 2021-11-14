@@ -1,11 +1,10 @@
-import { ChatService } from './../../services/chat.service';
-import { MessageService } from './../../services/messages.service';
-import { WebSocketServiceService } from './../../services/web-socket-service.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { ChatService } from './../../services/chat.service';
+import { WebSocketServiceService } from './../../services/web-socket-service.service';
 import { AuthService } from './../../services/login/auth.service';
 
 @Component({

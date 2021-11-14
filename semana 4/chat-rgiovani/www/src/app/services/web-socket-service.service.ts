@@ -1,7 +1,8 @@
-import { ISocketDataConnected } from '../model/SocketDataConnected';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client'
+
+import { ISocketDataConnected } from '../model/SocketDataConnected';
 
 @Injectable({
   providedIn: 'root'

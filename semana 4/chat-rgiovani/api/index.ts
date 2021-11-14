@@ -7,9 +7,9 @@ import * as http from 'http'
 
 import * as message from './controllers/message'
 import * as user from './controllers/user'
-
 import { isLogged } from './libs/middlewareLogin'
 import { initIo } from './libs/socket'
+import uploads from './upload'
 
 dotenv.config()
 
@@ -18,15 +18,21 @@ const PORT = 3000
 
 app.use(express.json())
 app.use(cors())
-
-// app.use(express.static('../www'))
-
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.post('/login', user.login)
 app.post('/register', user.register)
 app.post('/auth/validate', isLogged, user.checkIfTokenIsValid)
 
 app.get('/chat/messages', isLogged, message.list)
 app.post('/chat/messages', isLogged, message.create)
+
+app.post('/chat/upload/img', uploads.single('image-file'), (req, res, next) => {
+  const file = req.file
+
+  if (file) {
+    message.uploadImage(req, res)
+  }
+})
 
 const server = http.createServer(app)
 const io = new socketio.Server(server, {

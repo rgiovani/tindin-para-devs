@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import * as message from '../services/message'
 import { error } from '../libs/bindError'
+import { isLogged } from '../libs/middlewareLogin'
+
 
 const list = async (req: Request<any>, res: Response<any>) => {
     try {
@@ -27,7 +29,26 @@ const create = async (req: Request<any>, res: Response<any>) => {
     }
 }
 
+const uploadImage = async (req: Request<any>, res: Response<any>) => {
+    try {
+        isLogged(req, res, () => { })
+        const { _id: userId } = req.user
+
+        const fileName = (req.file?.originalname) ? req.file?.originalname : ''
+        const socketId = req.query.socketId?.toString()
+
+        const name = (req.user.name) ? req.user.name : 'unknown'
+
+        const fileCreated = await message.uploadImage({ fileName }, socketId, name, userId)
+        return res.json(fileCreated)
+    } catch (err: any) {
+        return error(res, err)
+    }
+}
+
+
 export {
     list,
     create,
+    uploadImage
 }

@@ -1,5 +1,6 @@
-import { WebSocketServiceService } from './web-socket-service.service';
 import { Injectable } from '@angular/core';
+
+import { WebSocketServiceService } from './web-socket-service.service';
 
 @Injectable({
   providedIn: 'root'

@@ -12,6 +12,7 @@ declare global {
 }
 
 const isLogged = async (req: Request<any>, res: Response<any>, next: NextFunction) => {
+
     if (!req.headers.token) {
         return res.status(401).json({ message: "Voce nao esta logado!!!" })
     }
@@ -20,10 +21,14 @@ const isLogged = async (req: Request<any>, res: Response<any>, next: NextFunctio
         const payload = verify(req.headers.token?.toString(), process.env.JWT_SECRET ?? 'emptyjwt') as any
         req.user = payload
 
-        next()
+        if (req.originalUrl != '/chat/upload/img') {
+            next()
+        }
+
     } catch (error: any) {
         return res.status(401).json({ message: error.message })
     }
+
 }
 
 export {
