@@ -1,4 +1,8 @@
-import { connect } from '../libs/mongodb'
+import { rename, readdirSync } from 'fs'
+import { resolve } from 'path'
+import { extname } from 'path/posix'
+
+import { connect, generateId } from '../libs/mongodb'
 
 import * as socket from '../libs/socket'
 
@@ -47,8 +51,10 @@ const create = async (message: IMessage, socketId: string, name: string, userId?
     return true
 }
 
-const uploadImage = async (file: IFile, socketId: string = '', name?: string, userId?: string) => {
+const uploadImage = async (file: IFile, socketId: string = '', username?: string, userId?: string) => {
     await connect()
+
+    const imageDirPath = resolve(__dirname, '../uploads');
 
     if (!file.fileName) {
         throw new Error("Informe o campo fileName!")
@@ -56,8 +62,21 @@ const uploadImage = async (file: IFile, socketId: string = '', name?: string, us
 
     file.user = userId
 
-    const newFile = await Message.create({ ...file, username: name })
-    socket.emitEvent('message', socketId, { user: name, path: `/uploads/${file.fileName}`, createdAt: newFile.createdAt })
+    const oldFileName = file.fileName
+    const fileType = extname(imageDirPath + file.fileName)
+    const newFileName = (await generateId()).toString() + fileType
+
+    file.fileName = newFileName
+    const { createdAt } = await Message.create({ ...file, username })
+
+    rename(
+        imageDirPath + `/${oldFileName}`,
+        imageDirPath + `/${newFileName}`,
+        (err) => {
+            if (err) throw err
+        }
+    )
+    socket.emitEvent('message', socketId, { user: username, path: `/uploads/${newFileName}`, createdAt })
     return true
 }
 
