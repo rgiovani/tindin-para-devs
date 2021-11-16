@@ -20,15 +20,10 @@ const isLogged = async (req: Request<any>, res: Response<any>, next: NextFunctio
     try {
         const payload = verify(req.headers.token?.toString(), process.env.JWT_SECRET ?? 'emptyjwt') as any
         req.user = payload
-
-        if (req.originalUrl != '/chat/upload/img') {
-            next()
-        }
-
+        next()
     } catch (error: any) {
         return res.status(401).json({ message: error.message })
     }
-
 }
 
 export {

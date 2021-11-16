@@ -26,13 +26,7 @@ app.post('/auth/validate', isLogged, user.checkIfTokenIsValid)
 app.get('/chat/messages', isLogged, message.list)
 app.post('/chat/messages', isLogged, message.create)
 
-app.post('/chat/upload/img', uploads.single('image-file'), (req, res, next) => {
-  const file = req.file
-
-  if (file) {
-    message.uploadImage(req, res)
-  }
-})
+app.post('/chat/upload/img', isLogged, uploads.single('image-file'), message.uploadImage)
 
 const server = http.createServer(app)
 const io = new socketio.Server(server, {
