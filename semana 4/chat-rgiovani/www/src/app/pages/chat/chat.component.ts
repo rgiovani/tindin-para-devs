@@ -58,7 +58,13 @@ export class ChatComponent implements OnInit {
   send(text: string) {
     const { socketDataConnected } = this.webSocketService
     this.textValue = ''
-    this.messageService.sendMessage({ text: text, socketId: socketDataConnected.socketId }).subscribe(async (res: any) => { })
+    this.messageService.sendMessage({ text: text, socketId: socketDataConnected.socketId }).subscribe(
+      async (res: any) => { },
+      async (err: any) => {
+        alert(err.error.message)
+        if (!sessionStorage.getItem('token'))
+          window.location.reload()
+      })
   }
 
   uploadImage(event: any) {
@@ -72,8 +78,12 @@ export class ChatComponent implements OnInit {
     formData.append('image-file', this.images)
 
     this.http.post<any>(url, formData).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
+      async (res) => { },
+      async (err) => {
+        alert(err.error.message)
+        if (!sessionStorage.getItem('token'))
+          window.location.reload()
+      }
     )
   }
 
