@@ -46,8 +46,8 @@
 - [x] Upload de arquivos
     - Desafios
         - [x] Adicionar upload de imagens no chat
-- [ ] Socket e upload de arquivos no front
-- [ ] Publicando sua aplicação
+- [x] Socket e upload de arquivos no front
+- [x] Publicando sua aplicação 
 
 Informações sobre o evento: 
  - https://www.tindin.com.br/post/curso-dev
